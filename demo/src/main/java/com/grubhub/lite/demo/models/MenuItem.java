@@ -1,6 +1,7 @@
 package com.grubhub.lite.demo.models;
 
 import jdk.jfr.Enabled;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;

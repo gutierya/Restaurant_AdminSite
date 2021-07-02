@@ -1,5 +1,7 @@
 package com.grubhub.lite.demo.models;
 
+
+
 public interface Enums {
 
     public enum Cuisine {
