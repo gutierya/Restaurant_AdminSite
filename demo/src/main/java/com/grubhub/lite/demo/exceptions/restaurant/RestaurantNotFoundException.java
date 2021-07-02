@@ -1,7 +1,7 @@
 package com.grubhub.lite.demo.exceptions.restaurant;
 
 public class RestaurantNotFoundException extends RuntimeException{
-    RestaurantNotFoundException(Long restaurantID) {
+    public RestaurantNotFoundException(Long restaurantID) {
         super("Restaurant " + restaurantID + " not found");
     }
 }

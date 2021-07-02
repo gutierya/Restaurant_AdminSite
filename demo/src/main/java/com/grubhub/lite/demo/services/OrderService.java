@@ -1,15 +1,16 @@
 package com.grubhub.lite.demo.services;
-import com.grubhub.lite.demo.Repo.OrderRepo;
 
 import com.grubhub.lite.demo.exceptions.customer.CustomerAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.order.OrderAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.order.OrderNotFoundException;
 import com.grubhub.lite.demo.exceptions.order.OrderUnableToCancelException;
 import com.grubhub.lite.demo.models.Enums;
-import com.grubhub.lite.demo.models.Order;
+import com.grubhub.lite.demo.models.FoodOrder;
 import com.grubhub.lite.demo.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class OrderService {
@@ -20,14 +21,14 @@ public class OrderService {
         this.orderRepository = orderRepo;
     }
 
-    public Order createOrder(Order order) throws OrderAlreadyExistsException {
-        if (orderRepository.existsById(order.getOrderID())) {
-            throw new CustomerAlreadyExistsException(order.getOrderID());
+    public FoodOrder createOrder(FoodOrder order) throws OrderAlreadyExistsException {
+        if (orderRepository.existsById(order.getId())){
+            throw new CustomerAlreadyExistsException(order.getId());
         }
         return orderRepository.save(order);
     }
 
-    public Order getOrderById(long id) throws OrderNotFoundException {
+    public FoodOrder getOrderById(long id) throws OrderNotFoundException {
         if (orderRepository.existsById(id)) {
             return orderRepository.getById(id);
         }
@@ -35,13 +36,27 @@ public class OrderService {
     }
 
     public void cancelOrder(long id) throws OrderUnableToCancelException, OrderNotFoundException {
-        if (!orderRepository.existsById(id) || getOrderById(id).getStatus().ordinal() >= Enums.OrderStatus.Cooking.ordinal() ) {
+        if (!orderRepository.existsById(id) || orderRepository.getById(id).getStatus().ordinal() >= Enums.OrderStatus.Cooking.ordinal() ) {
             throw new OrderUnableToCancelException(id);
         }
         else{
-            getOrderById(id).setStatus(Enums.OrderStatus.Cancelled);
-            orderRepository.delete(getOrderById(id));
+            orderRepository.getById(id).setStatus(Enums.OrderStatus.Cancelled);
+            orderRepository.delete(orderRepository.getById(id));
         }
+    }
+
+    public Date getExpectedCompletion(long id) throws OrderNotFoundException {
+        if (orderRepository.existsById(id)) {
+            return orderRepository.getById(id).getExpectedCompletion();
+        }
+        throw new OrderNotFoundException(id);
+    }
+
+    public Date getCreatedTime (long id) throws OrderNotFoundException {
+        if (orderRepository.existsById(id)) {
+            return orderRepository.getById(id).getCreatedTime();
+        }
+        throw new OrderNotFoundException(id);
     }
 
 }
