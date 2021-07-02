@@ -1,11 +1,6 @@
 package com.grubhub.lite.demo.models;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -14,26 +9,24 @@ import java.util.Objects;
  * Class Order
  */
 @Entity
-public class Order {
+public class FoodOrder {
 
   //
   // Fields
   //
-
-  private @Id
-  @GeneratedValue
-  Long orderID;
+  @Id  @GeneratedValue
+  private  Long id;
   private Date createdTime;
   private Date expectedCompletion;
   private Long sourceRestaurantID;
   @ElementCollection
-  private List<Integer> items;
+  private List<Long> items;
   private Enums.OrderStatus status;
   private Long deliveryDriverID;
   private Long destUserID;
   private Double orderTotal;
-  private double tax;
-  private double orderSubTotal;
+  private Double tax;
+  private Double orderSubTotal;
   private Long customerID;
   private Double tipAmount;
   private Long paymentID;
@@ -41,7 +34,7 @@ public class Order {
   //
   // Constructors
   //
-  public Order () { };
+  public FoodOrder() { };
   
   //
   // Methods
@@ -56,16 +49,16 @@ public class Order {
    * Set the value of orderID
    * @param newVar the new value of orderID
    */
-  public void setOrderID (Long newVar) {
-    orderID = newVar;
+  public void setId(Long newVar) {
+    id = newVar;
   }
 
   /**
    * Get the value of orderID
    * @return the value of orderID
    */
-  public Long getOrderID () {
-    return orderID;
+  public Long getId() {
+    return id;
   }
 
   /**
@@ -120,7 +113,7 @@ public class Order {
    * Set the value of items
    * @param newVar the new value of items
    */
-  public void setItems (List<Integer> newVar) {
+  public void setItems (List<Long> newVar) {
     items = newVar;
   }
 
@@ -128,7 +121,7 @@ public class Order {
    * Get the value of items
    * @return the value of items
    */
-  public List<Integer> getItems () {
+  public List<Long> getItems () {
     return items;
   }
 
@@ -286,7 +279,7 @@ public class Order {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Order order = (Order) o;
+    FoodOrder order = (FoodOrder) o;
 
     if (Double.compare(order.tax, tax) != 0) return false;
     if (Double.compare(order.orderSubTotal, orderSubTotal) != 0) return false;
@@ -310,7 +303,7 @@ public class Order {
   public int hashCode() {
     int result;
     long temp;
-    result = orderID != null ? orderID.hashCode() : 0;
+    result = id != null ? id.hashCode() : 0;
     result = 31 * result + (createdTime != null ? createdTime.hashCode() : 0);
     result = 31 * result + (expectedCompletion != null ? expectedCompletion.hashCode() : 0);
     result = 31 * result + (sourceRestaurantID != null ? sourceRestaurantID.hashCode() : 0);
@@ -332,7 +325,7 @@ public class Order {
   @Override
   public String toString() {
     return "Order{" +
-            "orderID=" + orderID +
+            "orderID=" + id +
             ", createdTime=" + createdTime +
             ", expectedCompletion=" + expectedCompletion +
             ", sourceRestaurantID=" + sourceRestaurantID +
