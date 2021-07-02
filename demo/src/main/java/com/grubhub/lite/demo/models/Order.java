@@ -1,5 +1,7 @@
 package com.grubhub.lite.demo.models;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
