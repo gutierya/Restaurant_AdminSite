@@ -4,6 +4,7 @@ import com.grubhub.lite.demo.exceptions.customer.CustomerAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.customer.CustomerNotFoundException;
 import com.grubhub.lite.demo.exceptions.driver.DriverAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.driver.DriverNotFoundException;
+import com.grubhub.lite.demo.exceptions.menuItems.MenuItemAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.menuItems.MenuItemNotFoundException;
 import com.grubhub.lite.demo.exceptions.order.OrderAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.order.OrderNotFoundException;
@@ -31,7 +32,8 @@ public class GlobalExceptionHandler {
             CustomerAlreadyExistsException.class,
             DriverAlreadyExistsException.class,
             OrderAlreadyExistsException.class,
-            RestaurantAlreadyExistsException.class
+            RestaurantAlreadyExistsException.class,
+            MenuItemAlreadyExistsException.class,
     })
     public ResponseEntity<String> handleAlreadyExistsExceptions(RuntimeException ex) {
         return new ResponseEntity<>(
