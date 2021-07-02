@@ -9,14 +9,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Controller
 public class PaymentExceptionHandler {
 
-    @ExceptionHandler(PaymentNotFoundException.class)
-    public ResponseEntity<String> handlePaymentNotFound(PaymentNotFoundException ex) {
-        return new ResponseEntity<>(
-                ex.getMessage(),
-                HttpStatus.NOT_FOUND
-        );
-    }
-
     @ExceptionHandler(PaymentDeclinedException.class)
     public ResponseEntity<String> handlePaymentDeclined(PaymentDeclinedException ex) {
         return new ResponseEntity<>(
