@@ -246,7 +246,6 @@ public class MenuItem {
     if (!Objects.equals(price, menuItem.price)) return false;
     if (!Objects.equals(dietaryRestrictions, menuItem.dietaryRestrictions))
       return false;
-    if (!Objects.equals(id, menuItem.id)) return false;
     if (!Objects.equals(category, menuItem.category)) return false;
     return Objects.equals(restaurantID, menuItem.restaurantID);
   }

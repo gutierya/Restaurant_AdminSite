@@ -288,7 +288,6 @@ public class Order {
 
     if (Double.compare(order.tax, tax) != 0) return false;
     if (Double.compare(order.orderSubTotal, orderSubTotal) != 0) return false;
-    if (!Objects.equals(orderID, order.orderID)) return false;
     if (!Objects.equals(createdTime, order.createdTime)) return false;
     if (!Objects.equals(expectedCompletion, order.expectedCompletion))
       return false;

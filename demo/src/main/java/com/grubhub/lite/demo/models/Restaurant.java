@@ -1,5 +1,6 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,12 +26,15 @@ public class Restaurant {
   private Enums.Cuisine type;
   private Double averageWaitTime;
   private Enums.ValueProp valueProposition;
-  private List<MenuItem> menu;
+  @ElementCollection
+  private List<Long> menu;
+  @ElementCollection
   private List<Enums.DietaryRestrictions> dietaryRestrictions;
   private @Id
   @GeneratedValue
   Long id;
   private Boolean offersTakeout;
+  @ElementCollection
   private List<String> categories;
   
   //
@@ -195,7 +199,7 @@ public class Restaurant {
    * Set the value of menu
    * @param newVar the new value of menu
    */
-  public void setMenu (List<MenuItem> newVar) {
+  public void setMenu (List<Long> newVar) {
     menu = newVar;
   }
 
@@ -203,7 +207,7 @@ public class Restaurant {
    * Get the value of menu
    * @return the value of menu
    */
-  public List<MenuItem> getMenu () {
+  public List<Long> getMenu () {
     return menu;
   }
 
@@ -316,7 +320,6 @@ public class Restaurant {
     if (!Objects.equals(menu, that.menu)) return false;
     if (!Objects.equals(dietaryRestrictions, that.dietaryRestrictions))
       return false;
-    if (!Objects.equals(id, that.id)) return false;
     if (!Objects.equals(offersTakeout, that.offersTakeout)) return false;
     return Objects.equals(categories, that.categories);
   }

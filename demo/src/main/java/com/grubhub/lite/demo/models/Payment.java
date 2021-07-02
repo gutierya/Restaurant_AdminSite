@@ -95,7 +95,6 @@ public class Payment {
 
     Payment payment = (Payment) o;
 
-    if (!Objects.equals(paymentID, payment.paymentID)) return false;
     if (paymentType != payment.paymentType) return false;
     return paymentStatus == payment.paymentStatus;
   }

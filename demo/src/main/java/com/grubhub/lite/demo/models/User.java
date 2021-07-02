@@ -77,7 +77,6 @@ public class User {
 
     User user = (User) o;
 
-    if (!Objects.equals(userID, user.userID)) return false;
     return Objects.equals(uniqueIdentifier, user.uniqueIdentifier);
   }
 
