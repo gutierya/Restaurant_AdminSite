@@ -1,17 +1,18 @@
 package com.grubhub.lite.demo.services;
 
-import com.grubhub.lite.demo.repositories.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import com.grubhub.lite.demo.exceptions.payment.PaymentNotFoundException;
+import com.grubhub.lite.demo.models.Payment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentService {
-    @Autowired
-    private ApplicationContext context;
 
-    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+    public Payment getPaymentById(long id) throws PaymentNotFoundException {
+        if (RepositoryService.getPaymentRepository().existsById(id)) {
+            return RepositoryService.getPaymentRepository().getById(id);
+        }
+        throw new PaymentNotFoundException(id);
+    }
 
-    // set
-    // return payment
+
 }
