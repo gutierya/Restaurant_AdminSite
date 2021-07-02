@@ -14,6 +14,7 @@ import com.grubhub.lite.demo.repositories.MenuItemRepository;
 import com.grubhub.lite.demo.repositories.OrderRepository;
 import com.grubhub.lite.demo.repositories.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,27 +22,31 @@ import java.util.List;
 
 @Service
 public class CustomerService {
+    @Autowired
+    private ApplicationContext context;
+
+    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
 
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
-        if (RepositoryService.getCustomerRepository().existsById(customer.getUserID())) {
+        if (repositoryService.getCustomerRepository().existsById(customer.getUserID())) {
             throw new CustomerAlreadyExistsException(customer.getUserID());
         }
-        return RepositoryService.getCustomerRepository().save(customer);
+        return repositoryService.getCustomerRepository().save(customer);
     }
 
     public Customer getCustomerByid(Long id) throws CustomerNotFoundException {
-        if (RepositoryService.getCustomerRepository().existsById(id)) {
-            return RepositoryService.getCustomerRepository().getById(id);
+        if (repositoryService.getCustomerRepository().existsById(id)) {
+            return repositoryService.getCustomerRepository().getById(id);
         }
         throw new CustomerNotFoundException(id);
     }
 
     public List<Restaurant> getFavoriteRestaurants(Long id) throws CustomerNotFoundException {
-        if (RepositoryService.getCustomerRepository().existsById(id)) {
-            List<Long> restaurantIds = RepositoryService.getCustomerRepository().getById(id).getFavoriteRestaurants();
+        if (repositoryService.getCustomerRepository().existsById(id)) {
+            List<Long> restaurantIds = repositoryService.getCustomerRepository().getById(id).getFavoriteRestaurants();
             List<Restaurant> restaurants = new ArrayList<>();
             for (Long restaurantId : restaurantIds) {
-                restaurants.add(RepositoryService.getRestaurantRepository().findById(restaurantId).orElseThrow(() -> new RestaurantNotFoundException(restaurantId)));
+                restaurants.add(repositoryService.getRestaurantRepository().findById(restaurantId).orElseThrow(() -> new RestaurantNotFoundException(restaurantId)));
             }
             return restaurants;
 
@@ -50,11 +55,11 @@ public class CustomerService {
     }
 
     public List<MenuItem> getFavoriteItems(Long id) throws CustomerNotFoundException {
-        if (RepositoryService.getCustomerRepository().existsById(id)) {
-            List<Long> menuItemIds = RepositoryService.getCustomerRepository().getById(id).getFavoriteItems();
+        if (repositoryService.getCustomerRepository().existsById(id)) {
+            List<Long> menuItemIds = repositoryService.getCustomerRepository().getById(id).getFavoriteItems();
             List<MenuItem> favoriteItems = new ArrayList<>();
             for(Long itemID : menuItemIds) {
-                favoriteItems.add(RepositoryService.getMenuItemRepository().findById(itemID).orElseThrow(() -> new MenuItemNotFoundException(itemID)));
+                favoriteItems.add(repositoryService.getMenuItemRepository().findById(itemID).orElseThrow(() -> new MenuItemNotFoundException(itemID)));
             }
             return favoriteItems;
         }
@@ -62,18 +67,20 @@ public class CustomerService {
     }
 
     public List<FoodOrder> getOrderHistory(Long id) throws CustomerNotFoundException, OrderNotFoundException {
-        if (RepositoryService.getCustomerRepository().existsById(id)) {
-            List<Long> orderIds = RepositoryService.getCustomerRepository().getById(id).getOrderHistory();
+        if (repositoryService.getCustomerRepository().existsById(id)) {
+            List<Long> orderIds = repositoryService.getCustomerRepository().getById(id).getOrderHistory();
             List<FoodOrder> previousOrders = new ArrayList<>();
             for(Long orderID : orderIds) {
-                previousOrders.add(RepositoryService.getOrderRepository().findById(orderID).orElseThrow(() -> new OrderNotFoundException(orderID)));
+                previousOrders.add(repositoryService.getOrderRepository().findById(orderID).orElseThrow(() -> new OrderNotFoundException(orderID)));
             }
             return previousOrders;
         }
         throw new CustomerNotFoundException(id);
     }
 
-
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
 }
 
 

@@ -6,70 +6,77 @@ import com.grubhub.lite.demo.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class RepositoryService {
 
-    static private CustomerRepository customerRepository;
-    static private RestaurantRepository restaurantRepository;
-    static private MenuItemRepository menuItemRepository;
-    static private OrderRepository orderRepository;
-    static private UserRepository userRepository;
-    static private DriverRepository driverRepository;
-    static private PaymentRepository paymentRepository;
+    @Autowired
+   private CustomerRepository customerRepository;
+    @Autowired
+   private RestaurantRepository restaurantRepository;
+    @Autowired
+   private MenuItemRepository menuItemRepository;
+    @Autowired
+   private OrderRepository orderRepository;
+    @Autowired
+   private UserRepository userRepository;
+    @Autowired
+   private DriverRepository driverRepository;
+    @Autowired
+   private PaymentRepository paymentRepository;
 
-    public static CustomerRepository getCustomerRepository() {
+    public CustomerRepository getCustomerRepository() {
         return customerRepository;
     }
 
-    public static void setCustomerRepository(CustomerRepository customerRepository) {
-        RepositoryService.customerRepository = customerRepository;
+    public void setCustomerRepository(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    public static RestaurantRepository getRestaurantRepository() {
+    public RestaurantRepository getRestaurantRepository() {
         return restaurantRepository;
     }
 
-    public static void setRestaurantRepository(RestaurantRepository restaurantRepository) {
-        RepositoryService.restaurantRepository = restaurantRepository;
+    public void setRestaurantRepository(RestaurantRepository restaurantRepository) {
+        this.restaurantRepository = restaurantRepository;
     }
 
-    public static MenuItemRepository getMenuItemRepository() {
+    public MenuItemRepository getMenuItemRepository() {
         return menuItemRepository;
     }
 
-    public static void setMenuItemRepository(MenuItemRepository menuItemRepository) {
-        RepositoryService.menuItemRepository = menuItemRepository;
+    public void setMenuItemRepository(MenuItemRepository menuItemRepository) {
+        this.menuItemRepository = menuItemRepository;
     }
 
-    public static OrderRepository getOrderRepository() {
+    public OrderRepository getOrderRepository() {
         return orderRepository;
     }
 
-    public static void setOrderRepository(OrderRepository orderRepository) {
-        RepositoryService.orderRepository = orderRepository;
+    public void setOrderRepository(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
-    public static UserRepository getUserRepository() {
+    public UserRepository getUserRepository() {
         return userRepository;
     }
 
-    public static void setUserRepository(UserRepository userRepository) {
-        RepositoryService.userRepository = userRepository;
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public static DriverRepository getDriverRepository() {
+    public DriverRepository getDriverRepository() {
         return driverRepository;
     }
 
-    public static void setDriverRepository(DriverRepository driverRepository) {
-        RepositoryService.driverRepository = driverRepository;
+    public void setDriverRepository(DriverRepository driverRepository) {
+        this.driverRepository = driverRepository;
     }
 
-    public static PaymentRepository getPaymentRepository() {
+    public PaymentRepository getPaymentRepository() {
         return paymentRepository;
     }
 
-    public static void setPaymentRepository(PaymentRepository paymentRepository) {
-        RepositoryService.paymentRepository = paymentRepository;
+    public void setPaymentRepository(PaymentRepository paymentRepository) {
+        this.paymentRepository = paymentRepository;
     }
 }
