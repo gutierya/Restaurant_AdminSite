@@ -1,5 +1,9 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -7,16 +11,20 @@ import java.util.Objects;
 /**
  * Class Order
  */
+@Entity
 public class Order {
 
   //
   // Fields
   //
 
-  private Long orderID;
+  private @Id
+  @GeneratedValue
+  Long orderID;
   private Date createdTime;
   private Date expectedCompletion;
   private Long sourceRestaurantID;
+  @ElementCollection
   private List<Integer> items;
   private Enums.OrderStatus status;
   private Long deliveryDriverID;

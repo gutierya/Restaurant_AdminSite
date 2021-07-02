@@ -1,11 +1,14 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import java.util.*;
 
 
 /**
  * Class Customer
  */
+@Entity
 public class Customer extends User {
 
   //
@@ -13,9 +16,13 @@ public class Customer extends User {
   //
 
   private String address;
-  private List<Order> orderHistory;
-  private List<Restaurant> favoriteRestaurants;
-  private List<MenuItem> favoriteItems;
+
+  @ElementCollection
+  private List<Long> orderHistory;
+  @ElementCollection
+  private List<Long> favoriteRestaurants;
+  @ElementCollection
+  private List<Long> favoriteItems;
   
   //
   // Constructors
@@ -51,7 +58,7 @@ public class Customer extends User {
    * Set the value of orderHistory
    * @param newVar the new value of orderHistory
    */
-  public void setOrderHistory (List<Order> newVar) {
+  public void setOrderHistory (List<Long> newVar) {
     orderHistory = newVar;
   }
 
@@ -59,7 +66,7 @@ public class Customer extends User {
    * Get the value of orderHistory
    * @return the value of orderHistory
    */
-  public List<Order> getOrderHistory () {
+  public List<Long> getOrderHistory () {
     return orderHistory;
   }
 
@@ -67,7 +74,7 @@ public class Customer extends User {
    * Set the value of favoriteRestaurants
    * @param newVar the new value of favoriteRestaurants
    */
-  public void setFavoriteRestaurants (List<Restaurant> newVar) {
+  public void setFavoriteRestaurants (List<Long> newVar) {
     favoriteRestaurants = newVar;
   }
 
@@ -75,7 +82,7 @@ public class Customer extends User {
    * Get the value of favoriteRestaurants
    * @return the value of favoriteRestaurants
    */
-  public List<Restaurant> getFavoriteRestaurants () {
+  public List<Long> getFavoriteRestaurants () {
     return favoriteRestaurants;
   }
 
@@ -83,7 +90,7 @@ public class Customer extends User {
    * Set the value of favoriteItems
    * @param newVar the new value of favoriteItems
    */
-  public void setFavoriteItems (List<MenuItem> newVar) {
+  public void setFavoriteItems (List<Long> newVar) {
     favoriteItems = newVar;
   }
 
@@ -91,7 +98,7 @@ public class Customer extends User {
    * Get the value of favoriteItems
    * @return the value of favoriteItems
    */
-  public List<MenuItem> getFavoriteItems () {
+  public List<Long> getFavoriteItems () {
     return favoriteItems;
   }
 

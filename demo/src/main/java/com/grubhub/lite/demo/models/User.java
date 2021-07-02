@@ -1,18 +1,22 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.*;
 
 
 /**
  * Class User
  */
+@Entity
 public class User {
 
   //
   // Fields
   //
 
-  private Long userID;
+  private @Id @GeneratedValue  Long userID;
   private String uniqueIdentifier;
   
   //

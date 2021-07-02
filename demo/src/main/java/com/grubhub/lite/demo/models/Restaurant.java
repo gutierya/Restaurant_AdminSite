@@ -1,11 +1,15 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.*;
 
 
 /**
  * Class Restaurant
  */
+@Entity
 public class Restaurant {
 
   //
@@ -23,7 +27,9 @@ public class Restaurant {
   private Enums.ValueProp valueProposition;
   private List<MenuItem> menu;
   private List<Enums.DietaryRestrictions> dietaryRestrictions;
-  private Long id;
+  private @Id
+  @GeneratedValue
+  Long id;
   private Boolean offersTakeout;
   private List<String> categories;
   

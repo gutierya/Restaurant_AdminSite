@@ -1,11 +1,15 @@
 package com.grubhub.lite.demo.models;
 
+import jdk.jfr.Enabled;
+
+import javax.persistence.Entity;
 import java.util.Date;
 import java.util.Objects;
 
 /**
  * Class Driver
  */
+@Entity
 public class Driver extends User {
 
   //

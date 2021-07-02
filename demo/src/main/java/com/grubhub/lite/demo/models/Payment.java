@@ -1,17 +1,23 @@
 package com.grubhub.lite.demo.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
  * Class Payment
  */
+@Entity
 public class Payment {
 
   //
   // Fields
   //
 
-  private Long paymentID;
+  private @Id
+  @GeneratedValue
+  Long paymentID;
   private Enums.PaymentType paymentType;
   private Enums.PaymentStatus paymentStatus;
   

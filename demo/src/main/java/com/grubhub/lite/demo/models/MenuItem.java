@@ -1,11 +1,18 @@
 package com.grubhub.lite.demo.models;
 
+import jdk.jfr.Enabled;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * Class MenuItem
  */
+@Entity
 public class MenuItem {
 
   //
@@ -14,13 +21,17 @@ public class MenuItem {
 
   private String itemName;
   private String description;
+  @ElementCollection
   private List<String> ingredients;
   private Integer calories;
   private Boolean isInStock;
   private String imageUrl;
   private Double price;
+  @ElementCollection
   private List<Enums.DietaryRestrictions> dietaryRestrictions;
-  private Long id;
+  private @Id
+  @GeneratedValue
+  Long id;
   private String category;
   private Long restaurantID;
   
