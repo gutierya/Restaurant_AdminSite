@@ -16,7 +16,7 @@ public class LoadMenuItemDatabase {
     @Bean
     CommandLineRunner initMenuItemDB(MenuItemRepository repository) {
         return args -> {
-            log.info("Loading empty " + this.getClass().getName());
+            log.info("Loading empty MenuItem Database");
         };
     }
 }

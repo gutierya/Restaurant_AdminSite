@@ -15,7 +15,7 @@ public class LoadPaymentDatabase {
     @Bean
     CommandLineRunner initPaymentDB(PaymentRepository repository) {
         return args -> {
-            log.info("Loading empty " + this.getClass().getName());
+            log.info("Loading empty Payment Database");
         };
     }
 }

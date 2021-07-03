@@ -15,7 +15,7 @@ public class LoadOrderDatabase {
     @Bean
     CommandLineRunner initOrderDB(OrderRepository repository) {
         return args -> {
-            log.info("Loading empty " + this.getClass().getName());
+            log.info("Loading empty Order Database");
         };
     }
 }

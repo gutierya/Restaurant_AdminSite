@@ -15,7 +15,7 @@ public class LoadDriverDatabase {
     @Bean
     CommandLineRunner initDriverDB(DriverRepository repository) {
         return args -> {
-            log.info("Loading empty " + this.getClass().getName());
+            log.info("Loading empty Driver Database");
         };
     }
 }

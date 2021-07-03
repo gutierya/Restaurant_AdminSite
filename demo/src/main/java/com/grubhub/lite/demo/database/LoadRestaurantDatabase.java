@@ -16,7 +16,7 @@ public class LoadRestaurantDatabase {
     @Bean
     CommandLineRunner initRestaurantDB(RestaurantRepository repository) {
         return args -> {
-            log.info("Loading empty " + this.getClass().getName());
+            log.info("Loading empty Restaurant Database");
         };
     }
 }
