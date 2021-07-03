@@ -20,7 +20,7 @@ public class Payment {
   private @Id
   @GeneratedValue
   Long paymentID;
-  private Enums.PaymentType paymentType;
+  private Enums paymentType;
   private Enums.PaymentStatus paymentStatus;
   
   //
