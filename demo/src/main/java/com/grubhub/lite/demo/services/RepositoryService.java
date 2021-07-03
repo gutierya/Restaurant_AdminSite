@@ -3,6 +3,8 @@ package com.grubhub.lite.demo.services;
 import com.grubhub.lite.demo.exceptions.payment.PaymentNotFoundException;
 import com.grubhub.lite.demo.models.Driver;
 import com.grubhub.lite.demo.repositories.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,14 @@ public class RepositoryService {
 
     public CustomerRepository getCustomerRepository() {
         return customerRepository;
+    }
+
+    private static final Logger log = LoggerFactory.getLogger(RepositoryService.class);
+
+
+    RepositoryService() {
+        log.info( this.getClass() + " Service: UP");
+
     }
 
     public void setCustomerRepository(CustomerRepository customerRepository) {

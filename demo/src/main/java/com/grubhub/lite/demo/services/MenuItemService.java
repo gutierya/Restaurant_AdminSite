@@ -5,10 +5,10 @@ import com.grubhub.lite.demo.exceptions.menuItems.MenuItemNotFoundException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.MenuItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -18,7 +18,15 @@ public class MenuItemService {
     @Autowired
     private ApplicationContext context;
 
-    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+    private final RepositoryService repositoryService;
+    private static final Logger log = LoggerFactory.getLogger(MenuItemService.class);
+
+
+    MenuItemService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
+        log.info( this.getClass() + " Service: UP");
+
+    }
 
     public MenuItem addMenuItem(MenuItem menuItem, Long parentRestaurantId) throws MenuItemAlreadyExistsException {
         if (repositoryService.getMenuItemRepository().findAll().contains(menuItem)) {

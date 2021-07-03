@@ -9,6 +9,8 @@ import com.grubhub.lite.demo.models.Customer;
 import com.grubhub.lite.demo.models.FoodOrder;
 import com.grubhub.lite.demo.models.MenuItem;
 import com.grubhub.lite.demo.models.Restaurant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,14 @@ public class CustomerService {
     @Autowired
     private ApplicationContext context;
 
-    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+    private final RepositoryService repositoryService;
+    private static final Logger log = LoggerFactory.getLogger(CustomerService.class);
+
+
+    CustomerService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
+        log.info( this.getClass() + " Service: UP");
+    }
 
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
         if (repositoryService.getCustomerRepository().existsById(customer.getUserID())) {
@@ -74,9 +83,6 @@ public class CustomerService {
         throw new CustomerNotFoundException(id);
     }
 
-    public void setContext(ApplicationContext context) {
-        this.context = context;
-    }
 }
 
 

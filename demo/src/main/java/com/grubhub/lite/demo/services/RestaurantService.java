@@ -3,6 +3,8 @@ package com.grubhub.lite.demo.services;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.Restaurant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,15 @@ public class RestaurantService {
     @Autowired
     private ApplicationContext context;
 
-    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+    private final RepositoryService repositoryService;
+    private static final Logger log = LoggerFactory.getLogger(RestaurantService.class);
+
+
+    RestaurantService(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
+        log.info( this.getClass() + " Service: UP");
+
+    }
 
     public Restaurant getRestaurantByid(Long id) throws RestaurantNotFoundException {
         if (repositoryService.getRestaurantRepository().existsById(id)) {
