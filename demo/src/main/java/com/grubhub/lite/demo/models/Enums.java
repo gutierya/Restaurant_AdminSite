@@ -21,7 +21,7 @@ public interface Enums {
     }
 
     public enum OrderStatus{
-        Received, Cooking, AwaitingPickUp, InTransit, Delivered, Cancelled, PaymentReceived
+        Received,  PaymentReceived, Cooking, AwaitingPickUp, InTransit, Delivered, Cancelled,
     }
 
     public enum PaymentType {

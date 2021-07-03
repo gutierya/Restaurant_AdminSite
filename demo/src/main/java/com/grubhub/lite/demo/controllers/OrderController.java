@@ -2,18 +2,18 @@ package com.grubhub.lite.demo.controllers;
 
 import com.grubhub.lite.demo.exceptions.order.OrderNotFoundException;
 import com.grubhub.lite.demo.models.FoodOrder;
-import com.grubhub.lite.demo.repositories.UserRepository;
-import com.grubhub.lite.demo.repositories.OrderRepository;
 import com.grubhub.lite.demo.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
-    private OrderService orderService;
+    private final OrderService orderService;
 
     @Autowired
     public OrderController(OrderService orderService) {
@@ -24,9 +24,8 @@ public class OrderController {
      * Perspective - user client interaction
      * create an order
      */
-    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
     public FoodOrder placeOrder(@RequestBody FoodOrder order) {
         return this.orderService.createOrder(order);
     }
@@ -34,9 +33,8 @@ public class OrderController {
     /**
      * get order by - order id
      */
-    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
-    @ResponseBody
-    public FoodOrder getOrderByID(@PathVariable("orderID") Long orderId) throws OrderNotFoundException {
+    @GetMapping(value = "/byID/{orderId}")
+    public FoodOrder getOrderByID(@PathVariable Long orderId) throws OrderNotFoundException {
         return this.orderService.getOrderById(orderId);
     }
 
@@ -44,45 +42,51 @@ public class OrderController {
      * Perspective - user to restaurant
      * cancel an order
      */
-    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.POST)
-    public void cancelAnOrder(@PathVariable("orderId") Long orderId) throws OrderNotFoundException {
-        this.orderService.cancelOrder(orderId);
+    @GetMapping(value = "/cancelOrder/{orderID}")
+    public void cancelAnOrder(@PathVariable Long orderID) throws OrderNotFoundException {
+        System.out.println("Order ID: " + orderID);
+        this.orderService.cancelOrder(orderID);
     }
 
     /**
      * Perspective - user to restaurant
      * get expected completion time
      */
-    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
-    public void getExpectedCompletion(@PathVariable("orderId") Long orderId) throws OrderNotFoundException {
-        this.orderService.getExpectedCompletion(orderId);
+    @GetMapping(value = "/expectedCompletion/{orderID}")
+    public void getExpectedCompletion(@PathVariable Long orderID) throws OrderNotFoundException {
+        this.orderService.getExpectedCompletion(orderID);
     }
 
     /**
      * Perspective - user to restaurant
      * get created time
      */
-    @RequestMapping(value = "/order/{orderId}", method = RequestMethod.GET)
-    public void getCreatedTime(@PathVariable("orderId") Long orderId) throws OrderNotFoundException {
-        this.orderService.getCreatedTime(orderId);
+    @GetMapping(value = "/createdTime/{orderID}")
+    public void getCreatedTime(@PathVariable Long orderID) throws OrderNotFoundException {
+        this.orderService.getCreatedTime(orderID);
     }
 
     /**
      * Perspective - user to restaurant
      * get restaurant ID
      */
-    @RequestMapping(value = "/order/{Id}", method = RequestMethod.GET)
-    public void getRestaurantID(@PathVariable("Id") Long Id) throws OrderNotFoundException {
-        this.orderService.getSourceRestaurantID(Id);
+    @GetMapping(value = "/sourceRestaurant/{orderID}")
+    public void getRestaurantID(@PathVariable Long orderID) throws OrderNotFoundException {
+        this.orderService.getSourceRestaurantID(orderID);
     }
 
     /**
      * Perspective - user to restaurant
      * get delivery driver ID
      */
-    @RequestMapping(value = "/order/{Id}", method = RequestMethod.GET)
-    public void getDelivererID(@PathVariable("Id") Long Id) throws OrderNotFoundException {
-        this.orderService.getDeliveryDriverID(Id);
+    @GetMapping(value = "/driver/{orderID}")
+    public void getDelivererID(@PathVariable Long orderID) throws OrderNotFoundException {
+        this.orderService.getDeliveryDriverID(orderID);
+    }
+
+    @GetMapping("/")
+    public List<FoodOrder> getAllOrders() {
+        return orderService.getAllOrders();
     }
 
 

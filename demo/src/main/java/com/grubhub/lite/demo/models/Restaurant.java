@@ -41,7 +41,27 @@ public class Restaurant {
   // Constructors
   //
   public Restaurant () { };
-  
+
+  public Restaurant(String name, Short rating, String address, Boolean isOpen, Date timeOpen, Date timeClose,
+                    Enums.Cuisine type, Double averageWaitTime, Enums.ValueProp valueProposition, List<Long> menu,
+                    List<Enums.DietaryRestrictions> dietaryRestrictions, Boolean offersTakeout,
+                    List<String> categories) {
+    this.name = name;
+    this.rating = rating;
+    this.address = address;
+    this.isOpen = isOpen;
+    this.timeOpen = timeOpen;
+    this.timeClose = timeClose;
+    this.type = type;
+    this.averageWaitTime = averageWaitTime;
+    this.valueProposition = valueProposition;
+    this.menu = menu;
+    this.dietaryRestrictions = dietaryRestrictions;
+    this.id = id;
+    this.offersTakeout = offersTakeout;
+    this.categories = categories;
+  }
+
   //
   // Methods
   //
@@ -279,6 +299,14 @@ public class Restaurant {
   // Other methods
   //
 
+
+  public Boolean getOpen() {
+    return isOpen;
+  }
+
+  public void setOpen(Boolean open) {
+    isOpen = open;
+  }
 
   @Override
   public String toString() {

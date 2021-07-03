@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -41,7 +42,7 @@ public class OrderService {
 
     public FoodOrder getOrderById(Long id) throws OrderNotFoundException {
         if (repositoryService.getOrderRepository().existsById(id)) {
-            return repositoryService.getOrderRepository().getById(id);
+            return repositoryService.getOrderRepository().findById(id).orElseThrow(() -> new OrderNotFoundException(id));
         }
         throw new OrderNotFoundException(id);
     }
@@ -51,8 +52,13 @@ public class OrderService {
             throw new OrderUnableToCancelException(id);
         }
         else{
-            repositoryService.getOrderRepository().getById(id).setStatus(Enums.OrderStatus.Cancelled);
-            repositoryService.getOrderRepository().delete(repositoryService.getOrderRepository().getById(id));
+            var orderToCancel = repositoryService.getOrderRepository().findById(id).orElseThrow(() -> new OrderNotFoundException(id));
+            orderToCancel.setStatus(Enums.OrderStatus.Cancelled);
+            orderToCancel.setExpectedCompletion(null);
+            orderToCancel.setDeliveryDriverID(null);
+            repositoryService.getOrderRepository().delete(orderToCancel);
+            repositoryService.getOrderRepository().save(orderToCancel);
+           // repositoryService.getOrderRepository().delete(repositoryService.getOrderRepository().getById(id));
         }
     }
 
@@ -206,5 +212,9 @@ public class OrderService {
 
     public void setContext(ApplicationContext context) {
         this.context = context;
+    }
+
+    public List<FoodOrder> getAllOrders() {
+        return repositoryService.getOrderRepository().findAll();
     }
 }

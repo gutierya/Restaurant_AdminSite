@@ -40,7 +40,22 @@ public class MenuItem {
   // Constructors
   //
   public MenuItem () { };
-  
+
+  public MenuItem(String itemName, String description, List<String> ingredients, Integer calories, Boolean isInStock,
+                  String imageUrl, Double price, List<Enums.DietaryRestrictions> dietaryRestrictions, String category,
+                  Long restaurantID) {
+    this.itemName = itemName;
+    this.description = description;
+    this.ingredients = ingredients;
+    this.calories = calories;
+    this.isInStock = isInStock;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.dietaryRestrictions = dietaryRestrictions;
+    this.category = category;
+    this.restaurantID = restaurantID;
+  }
+
   //
   // Methods
   //

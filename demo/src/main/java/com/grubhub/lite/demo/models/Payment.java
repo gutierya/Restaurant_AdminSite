@@ -20,14 +20,19 @@ public class Payment {
   private @Id
   @GeneratedValue
   Long paymentID;
-  private Enums paymentType;
+  private Enums.PaymentType paymentType;
   private Enums.PaymentStatus paymentStatus;
   
   //
   // Constructors
   //
   public Payment () { };
-  
+
+  public Payment(Enums.PaymentType paymentType, Enums.PaymentStatus paymentStatus) {
+    this.paymentType = paymentType;
+    this.paymentStatus = paymentStatus;
+  }
+
   //
   // Methods
   //
@@ -57,7 +62,7 @@ public class Payment {
    * Set the value of paymentType
    * @param newVar the new value of paymentType
    */
-  public void setPaymentType (Enums newVar) {
+  public void setPaymentType (Enums.PaymentType newVar) {
     paymentType = newVar;
   }
 

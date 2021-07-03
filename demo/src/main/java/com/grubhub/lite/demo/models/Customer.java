@@ -28,7 +28,15 @@ public class Customer extends User {
   // Constructors
   //
   public Customer () { };
-  
+
+  public Customer(String uniqueIdentifier, String address, List<Long> orderHistory, List<Long> favoriteRestaurants, List<Long> favoriteItems) {
+    super(uniqueIdentifier);
+    this.address = address;
+    this.orderHistory = orderHistory;
+    this.favoriteRestaurants = favoriteRestaurants;
+    this.favoriteItems = favoriteItems;
+  }
+
   //
   // Methods
   //

@@ -35,7 +35,25 @@ public class FoodOrder {
   // Constructors
   //
   public FoodOrder() { };
-  
+
+  public FoodOrder(Date createdTime, Date expectedCompletion, Long sourceRestaurantID, List<Long> items,
+                   Enums.OrderStatus status, Long deliveryDriverID, Long destUserID, Double orderTotal, Double tax,
+                   Double orderSubTotal, Long customerID, Double tipAmount, Long paymentID) {
+    this.createdTime = createdTime;
+    this.expectedCompletion = expectedCompletion;
+    this.sourceRestaurantID = sourceRestaurantID;
+    this.items = items;
+    this.status = status;
+    this.deliveryDriverID = deliveryDriverID;
+    this.destUserID = destUserID;
+    this.orderTotal = orderTotal;
+    this.tax = tax;
+    this.orderSubTotal = orderSubTotal;
+    this.customerID = customerID;
+    this.tipAmount = tipAmount;
+    this.paymentID = paymentID;
+  }
+
   //
   // Methods
   //

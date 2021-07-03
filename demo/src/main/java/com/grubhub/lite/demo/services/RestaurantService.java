@@ -1,5 +1,6 @@
 package com.grubhub.lite.demo.services;
 
+import com.grubhub.lite.demo.exceptions.GlobalException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.Restaurant;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,16 +31,21 @@ public class RestaurantService {
 
     public Restaurant getRestaurantByid(Long id) throws RestaurantNotFoundException {
         if (repositoryService.getRestaurantRepository().existsById(id)) {
-            return repositoryService.getRestaurantRepository().getById(id);
+            return repositoryService.getRestaurantRepository().findById(id).orElseThrow(()-> new RestaurantNotFoundException(id));
         }
         throw new RestaurantNotFoundException(id);
     }
 
-    public Short getRating(Long id) throws RestaurantNotFoundException {
-        if (repositoryService.getRestaurantRepository().existsById(id)) {
-            return repositoryService.getRestaurantRepository().getById(id).getRating();
+    public List<Restaurant> getRating(Short rating) throws RestaurantNotFoundException {
+        if (repositoryService.getRestaurantRepository().count() > 0) {
+            ArrayList<Restaurant> matchedRestaurants = new ArrayList<>();
+            for(var element:  repositoryService.getRestaurantRepository().findAll()) {
+                if(element.getRating() >= rating)
+                    matchedRestaurants.add(element);
+            }
+            return matchedRestaurants;
         }
-        throw new RestaurantNotFoundException(id);
+        throw new GlobalException("Restaurant DB is empty");
     }
 
     public Date getTimeOpen(Long id) throws RestaurantNotFoundException {
@@ -97,6 +104,23 @@ public class RestaurantService {
         throw new RestaurantNotFoundException(id);
     }
 
+    public List<Restaurant> getByIsOpen () throws RestaurantNotFoundException {
+        if (repositoryService.getRestaurantRepository().count() > 0) {
+            ArrayList<Restaurant> openRestaurants = new ArrayList<>();
+            repositoryService.getRestaurantRepository().findAll().forEach(restaurant -> {
+                if (restaurant.getIsOpen()) {
+                    openRestaurants.add(restaurant);
+                }
+            });
+            return openRestaurants;
+
+
+        } else {
+            throw new GlobalException("Restaurant DB is empty");
+
+        }
+    }
+
     public void setTimeOpen (Date newVar, Long id) throws RestaurantNotFoundException {
         if (repositoryService.getRestaurantRepository().existsById(id)) {
             repositoryService.getRestaurantRepository().getById(id).setTimeOpen(newVar);
@@ -124,6 +148,19 @@ public class RestaurantService {
         }
         throw new RestaurantNotFoundException(id);
     }
+
+    public List<Restaurant> getByType(Enums.Cuisine cuisine) {
+        if(repositoryService.getRestaurantRepository().count() > 0) {
+            ArrayList<Restaurant> cuisineRestaurants = new ArrayList<>();
+            repositoryService.getRestaurantRepository().findAll().forEach((restaurant -> {
+                if(restaurant.getType() == cuisine) {
+                    cuisineRestaurants.add(restaurant);
+                }
+            }));
+            return cuisineRestaurants;
+        }
+        else throw new GlobalException("Restaurant Database is empty");
+     }
 
     public void setAverageWaitTime (Double newVar, Long id) throws RestaurantNotFoundException {
         if (repositoryService.getRestaurantRepository().existsById(id)) {
@@ -176,5 +213,37 @@ public class RestaurantService {
 
     public void setContext(ApplicationContext context) {
         this.context = context;
+    }
+
+    public List<Restaurant> getRestaurants() {
+        return repositoryService.getRestaurantRepository().findAll();
+    }
+
+    public List<Restaurant> getByValueProposition(Enums.ValueProp valueProp) {
+        if(repositoryService.getRestaurantRepository().count() > 0){
+            ArrayList<Restaurant> matchedRestaurants = new ArrayList<>();
+            for(var element : repositoryService.getRestaurantRepository().findAll()) {
+                if(element.getValueProposition() == valueProp) {
+                    matchedRestaurants.add(element);
+                }
+            }
+            return matchedRestaurants;
+        }
+        throw new GlobalException("Restaurant DB is empty");
+    }
+
+    public List<Restaurant> getByRestrictions(List<Enums.DietaryRestrictions> restrictions) {
+        if(repositoryService.getRestaurantRepository().count() > 0) {
+            ArrayList<Restaurant> matchedRestaurants = new ArrayList<>();
+            for(Restaurant restaurant : repositoryService.getRestaurantRepository().findAll()) {
+                if(restaurant.getDietaryRestrictions().containsAll(restrictions)) {
+                    matchedRestaurants.add(restaurant);
+                }
+            }
+            return matchedRestaurants;
+
+        }
+        throw new GlobalException("Empty Restaurant DB");
+
     }
 }

@@ -25,7 +25,10 @@ public class User {
   // Constructors
   //
   public User () { };
-  
+
+  public User(String uniqueIdentifier) {
+    this.uniqueIdentifier = uniqueIdentifier;
+  }
   //
   // Methods
   //

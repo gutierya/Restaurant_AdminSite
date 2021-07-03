@@ -24,7 +24,14 @@ public class Driver extends User {
   // Constructors
   //
   public Driver () { };
-  
+
+  public Driver(Short rating, Enums.VehicleType vehicle, Date estimatedArrivalTime, String UUID) {
+    super(UUID);
+    this.rating = rating;
+    this.vehicle = vehicle;
+    this.estimatedArrivalTime = estimatedArrivalTime;
+  }
+
   //
   // Methods
   //

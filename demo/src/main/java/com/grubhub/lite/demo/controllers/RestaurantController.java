@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/restaurants")
 public class RestaurantController {
 
     private RestaurantService restaurantService; //
@@ -26,47 +27,46 @@ public class RestaurantController {
     /**
      * Get all restaurants
      */
-    @RequestMapping(value = "/restaurants", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(value = "/")
     public List<Restaurant> getAllRestaurant() {
-        return getAllRestaurant();
+        return restaurantService.getRestaurants();
     }
 
     /**
      * get restaurants if - open
      * @return
      */
-    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Boolean getRestaurantIfOpen(@RequestParam(value = "isOpen") Long isOpen) {
-        return restaurantService.getIsOpen(isOpen);
+    @GetMapping(value = "/open")
+    public List<Restaurant> getRestaurantIfOpen() {
+        return restaurantService.getByIsOpen();
     }
 
     /**
      * get restaurants by cuisine
      */
-    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Enums.Cuisine getRestaurantByCuisine(@RequestParam(value = "orderId")  Long orderId) {
-        return this.restaurantService.getType(orderId);
+//    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+    @GetMapping("/cuisine/{cuisine}")
+    public List<Restaurant> getRestaurantByCuisine(@PathVariable Enums.Cuisine cuisine) {
+        return this.restaurantService.getByType(cuisine);
     }
 
     /**
      * get restaurants by value proposition
      */
-    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Enums.ValueProp getRestaurantByValueProp(@RequestParam(value = "orderId")  Long orderId) {
-        return this.restaurantService.getValueProposition(orderId);
+//    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseBody
+    @GetMapping("/valueProp/{valueProp}")
+    public List<Restaurant> getRestaurantByValueProp(@PathVariable Enums.ValueProp valueProp) {
+        return this.restaurantService.getByValueProposition(valueProp);
     }
 
     /**
      * get restaurants by rating
      */
-    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Short getRestaurantByRating(@RequestParam(value = "id") Long id) {
-        return this.restaurantService.getRating(id);
+    @GetMapping(value = "/rating/{rating}")
+    public List<Restaurant> getRestaurantByRating(@PathVariable Short rating) {
+        return this.restaurantService.getRating(rating);
     }
 
 
@@ -74,9 +74,8 @@ public class RestaurantController {
     /**
      * get restaurant - by restaurant id
      */
-    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Restaurant getRestaurantByID(@RequestParam(value = "id") Long id) {
+    @GetMapping(value = "/byID/{id}")
+    public Restaurant getRestaurantByID(@PathVariable Long id) {
         return restaurantService.getRestaurantByid(id);
     }
 
@@ -84,9 +83,14 @@ public class RestaurantController {
      * Get restaurant takeout offers
      * @return
      */
-    @RequestMapping(value = "/restaurant/{restaurantID}/items", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{restaurantID}/items", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Boolean getAllItems(@PathVariable(value = "id") Long id) {
-        return this.restaurantService.getOffersTakeout(id);
+    public Boolean getAllItems(@PathVariable Long restaurantID) {
+        return this.restaurantService.getOffersTakeout(restaurantID);
+    }
+
+    @GetMapping("/byDietaryRestrictions")
+    public List<Restaurant> getByDietaryRestrictions(@RequestBody List<Enums.DietaryRestrictions> restrictions) {
+        return restaurantService.getByRestrictions(restrictions);
     }
 }

@@ -1,12 +1,21 @@
 package com.grubhub.lite.demo.services;
 
+import com.grubhub.lite.demo.exceptions.GlobalException;
 import com.grubhub.lite.demo.exceptions.payment.PaymentNotFoundException;
 import com.grubhub.lite.demo.models.Driver;
+import com.grubhub.lite.demo.models.Restaurant;
 import com.grubhub.lite.demo.repositories.*;
+import org.apache.tomcat.jni.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 @Service
 public class RepositoryService {
@@ -89,4 +98,5 @@ public class RepositoryService {
     public void setPaymentRepository(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
+
 }

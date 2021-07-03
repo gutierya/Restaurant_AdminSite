@@ -1,12 +1,11 @@
 package com.grubhub.lite.demo.controllers;
 
-import com.grubhub.lite.demo.models.Customer;
 import com.grubhub.lite.demo.models.Driver;
-import com.grubhub.lite.demo.services.CustomerService;
 import com.grubhub.lite.demo.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
 public class DriverController {
 
     private DriverService driverService;
@@ -24,8 +23,8 @@ public class DriverController {
      */
     @CrossOrigin
     @PostMapping("/driver")
-    public void addADriver(@RequestBody DriverService driverService) {
-        driverService.addDriver(driverService);
+    public void addADriver(@RequestBody Driver driver) {
+        driverService.addDriver(driver);
     }
 
 
@@ -45,7 +44,7 @@ public class DriverController {
      * Get one driver
      */
     @CrossOrigin
-    @RequestMapping(value = "/driver", method = RequestMethod.GET)
+    @RequestMapping(value = "/driver/{id}", method = RequestMethod.GET)
     public Driver listAllDrivers(@PathVariable Long id){
         return this.driverService.getDriverByid(id);
     }

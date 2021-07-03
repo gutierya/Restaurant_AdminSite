@@ -1,14 +1,13 @@
 package com.grubhub.lite.demo.controllers;
 
-import com.grubhub.lite.demo.models.Customer;
 import com.grubhub.lite.demo.models.MenuItem;
-import com.grubhub.lite.demo.services.CustomerService;
 import com.grubhub.lite.demo.services.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class MenuController {
     private MenuItemService menuItemService;
 

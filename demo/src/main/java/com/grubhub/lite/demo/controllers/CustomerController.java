@@ -1,15 +1,9 @@
 package com.grubhub.lite.demo.controllers;
 
 import com.grubhub.lite.demo.models.Customer;
-import com.grubhub.lite.demo.models.Payment;
-import com.grubhub.lite.demo.repositories.UserRepository;
 import com.grubhub.lite.demo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.async.DeferredResult;
-
-import java.util.List;
 
 @RestController
 public class CustomerController {
@@ -29,8 +23,8 @@ public class CustomerController {
      */
     @CrossOrigin
     @PostMapping("/customer")
-    public void addAUser(@RequestBody CustomerService customerService) {
-        customerService.addCustomer(customerService);
+    public void addAUser(@RequestBody Customer customer) {
+        customerService.addCustomer(customer);
     }
 
 
@@ -50,7 +44,7 @@ public class CustomerController {
      * Get one customer
      */
     @CrossOrigin
-    @RequestMapping(value = "/customer", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer/{userID}", method = RequestMethod.GET)
     public Customer listOneUser( @PathVariable Long userID){
         return this.customerService.getCustomerByid(userID);
     }
