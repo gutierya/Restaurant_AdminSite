@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleNotFoundExceptions(RuntimeException ex) {
         return new ResponseEntity<>(
                 ex.getMessage(),
-                HttpStatus.CONFLICT
+                HttpStatus.NOT_FOUND
         );
     }
 }
