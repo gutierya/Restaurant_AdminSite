@@ -15,7 +15,7 @@ public class FoodOrder {
   // Fields
   //
   @Id  @GeneratedValue
-  private  Long id;
+  private Long id;
   private Date createdTime;
   private Date expectedCompletion;
   private Long sourceRestaurantID;
@@ -104,8 +104,9 @@ public class FoodOrder {
   /**
    * Get the value of sourceRestaurantID
    * @return the value of sourceRestaurantID
+   * @param id
    */
-  public Long getSourceRestaurantID () {
+  public Long getSourceRestaurantID(Long id) {
     return sourceRestaurantID;
   }
 
