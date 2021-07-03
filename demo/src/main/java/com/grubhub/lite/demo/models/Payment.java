@@ -57,7 +57,7 @@ public class Payment {
    * Set the value of paymentType
    * @param newVar the new value of paymentType
    */
-  public void setPaymentType (Enums.PaymentType newVar) {
+  public void setPaymentType (Enums newVar) {
     paymentType = newVar;
   }
 

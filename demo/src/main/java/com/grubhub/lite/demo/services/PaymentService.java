@@ -45,7 +45,7 @@ public class PaymentService {
         throw new PaymentNotFoundException(id);
     }
 
-    public void setPaymentType (Enums.PaymentType newVar, Long id) throws PaymentNotFoundException {
+    public void setPaymentType (Enums newVar, Long id) throws PaymentNotFoundException {
         if (repositoryService.getPaymentRepository().existsById(id)) {
             repositoryService.getPaymentRepository().getById(id).setPaymentType(newVar);
         }

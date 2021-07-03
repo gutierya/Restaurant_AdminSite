@@ -32,7 +32,7 @@ public class CustomerService {
         log.info( this.getClass() + " Service: UP");
     }
 
-    public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
+    public Customer addCustomer(CustomerService customer) throws CustomerAlreadyExistsException {
         if (repositoryService.getCustomerRepository().existsById(customer.getUserID())) {
             throw new CustomerAlreadyExistsException(customer.getUserID());
         }

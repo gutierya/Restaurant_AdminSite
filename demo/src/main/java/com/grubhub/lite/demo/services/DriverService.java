@@ -28,7 +28,7 @@ public class DriverService {
 
     }
 
-    public Driver addDriver(Driver driver) throws CustomerAlreadyExistsException {
+    public Driver addDriver(DriverService driver) throws CustomerAlreadyExistsException {
         if (repositoryService.getCustomerRepository().existsById(driver.getUserID())) {
             throw new CustomerAlreadyExistsException(driver.getUserID());
         }
