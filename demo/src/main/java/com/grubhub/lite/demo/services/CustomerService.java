@@ -68,6 +68,11 @@ public class CustomerService {
         throw new CustomerNotFoundException(id);
     }
 
+//    public void setFavoriteRestaurant (List<Long> newVar, Long id) throws CustomerNotFoundException, RestaurantNotFoundException {
+//    }
+
+//     public void setFavoriteItems setFavoriteItems (List<Long> newVar, Long id) throws CustomerNotFoundException, MenuItemNotFoundException {
+//     }
 
 }
 
