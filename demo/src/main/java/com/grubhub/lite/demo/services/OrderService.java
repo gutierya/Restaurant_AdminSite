@@ -8,6 +8,8 @@ import com.grubhub.lite.demo.exceptions.order.OrderUnableToCancelException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.FoodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 
@@ -15,163 +17,168 @@ import java.util.Date;
 @Service
 public class OrderService {
 
+    @Autowired
+    private ApplicationContext context;
+
+    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+
     public FoodOrder createOrder(FoodOrder order) throws OrderAlreadyExistsException {
-        if (RepositoryService.getOrderRepository().existsById(order.getId())){
+        if (repositoryService.getOrderRepository().existsById(order.getId())){
             throw new OrderAlreadyExistsException(order.getId());
         }
-        return RepositoryService.getOrderRepository().save(order);
+        return repositoryService.getOrderRepository().save(order);
     }
 
     public FoodOrder getOrderById(Long id) throws OrderNotFoundException {
-        if (RepositoryService.getOrderRepository().existsById(id)) {
-            return RepositoryService.getOrderRepository().getById(id);
+        if (repositoryService.getOrderRepository().existsById(id)) {
+            return repositoryService.getOrderRepository().getById(id);
         }
         throw new OrderNotFoundException(id);
     }
 
     public void cancelOrder(Long id) throws OrderUnableToCancelException, OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id) || RepositoryService.getOrderRepository().getById(id).getStatus().ordinal() >= Enums.OrderStatus.Cooking.ordinal() ) {
+        if (!repositoryService.getOrderRepository().existsById(id) || repositoryService.getOrderRepository().getById(id).getStatus().ordinal() >= Enums.OrderStatus.Cooking.ordinal() ) {
             throw new OrderUnableToCancelException(id);
         }
         else{
-            RepositoryService.getOrderRepository().getById(id).setStatus(Enums.OrderStatus.Cancelled);
-            RepositoryService.getOrderRepository().delete(RepositoryService.getOrderRepository().getById(id));
+            repositoryService.getOrderRepository().getById(id).setStatus(Enums.OrderStatus.Cancelled);
+            repositoryService.getOrderRepository().delete(repositoryService.getOrderRepository().getById(id));
         }
     }
 
     public Date getExpectedCompletion(Long id) throws OrderNotFoundException {
-        if (RepositoryService.getOrderRepository().existsById(id)) {
-            return RepositoryService.getOrderRepository().getById(id).getExpectedCompletion();
+        if (repositoryService.getOrderRepository().existsById(id)) {
+            return repositoryService.getOrderRepository().getById(id).getExpectedCompletion();
         }
         throw new OrderNotFoundException(id);
     }
 
     public Date getCreatedTime (Long id) throws OrderNotFoundException {
-        if (RepositoryService.getOrderRepository().existsById(id)) {
-            return RepositoryService.getOrderRepository().getById(id).getCreatedTime();
+        if (repositoryService.getOrderRepository().existsById(id)) {
+            return repositoryService.getOrderRepository().getById(id).getCreatedTime();
         }
         throw new OrderNotFoundException(id);
     }
 
     public void setExpectedCompletion (Date newVar, Long id) throws OrderNotFoundException {
-        if (RepositoryService.getOrderRepository().existsById(id)) {
-            RepositoryService.getOrderRepository().getById(id).setExpectedCompletion(newVar);
+        if (repositoryService.getOrderRepository().existsById(id)) {
+            repositoryService.getOrderRepository().getById(id).setExpectedCompletion(newVar);
         }
         throw new OrderNotFoundException(id);
     }
 
     public void setCreatedTime (Date newVar, Long id) throws OrderNotFoundException {
-        if (RepositoryService.getOrderRepository().existsById(id)) {
-            RepositoryService.getOrderRepository().getById(id).setCreatedTime(newVar);
+        if (repositoryService.getOrderRepository().existsById(id)) {
+            repositoryService.getOrderRepository().getById(id).setCreatedTime(newVar);
         }
         throw new OrderNotFoundException(id);
     }
 
     public void setSourceRestaurantID (Long newVar, Long id) throws RestaurantNotFoundException, OrderNotFoundException {
-        if (!RepositoryService.getRestaurantRepository().existsById(newVar) ) {
+        if (!repositoryService.getRestaurantRepository().existsById(newVar) ) {
             throw new RestaurantNotFoundException(newVar);
         }
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setSourceRestaurantID(newVar);
+        repositoryService.getOrderRepository().getById(id).setSourceRestaurantID(newVar);
     }
 
     public Long getSourceRestaurantID(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getSourceRestaurantID(id);
+        return repositoryService.getOrderRepository().getById(id).getSourceRestaurantID(id);
     }
 
     public void setDeliveryDriverID (Long newVar, Long id) throws OrderNotFoundException, DriverNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        if (!RepositoryService.getDriverRepository().existsById(newVar)) {
+        if (!repositoryService.getDriverRepository().existsById(newVar)) {
             throw new DriverNotFoundException(newVar);
         }
-        RepositoryService.getOrderRepository().getById(id).setDeliveryDriverID(newVar);
+        repositoryService.getOrderRepository().getById(id).setDeliveryDriverID(newVar);
     }
 
     public Long getDeliveryDriverID(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getDeliveryDriverID();
+        return repositoryService.getOrderRepository().getById(id).getDeliveryDriverID();
     }
 
     public void setDestUserID (Long newVar, Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setDestUserID(newVar);
+        repositoryService.getOrderRepository().getById(id).setDestUserID(newVar);
     }
 
     public Long getDestUserID(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getDestUserID();
+        return repositoryService.getOrderRepository().getById(id).getDestUserID();
     }
 
     public void setTax (double newVar, Long id) throws OrderNotFoundException  {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setTax(newVar);
+        repositoryService.getOrderRepository().getById(id).setTax(newVar);
     }
 
     public double getTax(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getTax();
+        return repositoryService.getOrderRepository().getById(id).getTax();
     }
 
     public void setCustomerID(Long newVar, Long id) throws OrderNotFoundException, CustomerNotFoundException {
-        if (!RepositoryService.getCustomerRepository().existsById(newVar)) {
+        if (!repositoryService.getCustomerRepository().existsById(newVar)) {
             throw new CustomerNotFoundException(newVar);
         }
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setCustomerID(newVar);
+        repositoryService.getOrderRepository().getById(id).setCustomerID(newVar);
     }
 
     public Long getCustomerID(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getCustomerID();
+        return repositoryService.getOrderRepository().getById(id).getCustomerID();
     }
 
     public void setTipAmount(Double newVar, Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setTipAmount(newVar);
+        repositoryService.getOrderRepository().getById(id).setTipAmount(newVar);
     }
 
     public Double getTipAmount(Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getTipAmount();
+        return repositoryService.getOrderRepository().getById(id).getTipAmount();
     }
 
     public void setPaymentID (Long newVar, Long id) throws OrderNotFoundException {
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        RepositoryService.getOrderRepository().getById(id).setPaymentID(newVar);
+        repositoryService.getOrderRepository().getById(id).setPaymentID(newVar);
     }
 
     public Long getPaymentID(Long id) throws OrderNotFoundException{
-        if (!RepositoryService.getOrderRepository().existsById(id)) {
+        if (!repositoryService.getOrderRepository().existsById(id)) {
             throw new OrderNotFoundException(id);
         }
-        return RepositoryService.getOrderRepository().getById(id).getPaymentID();
+        return repositoryService.getOrderRepository().getById(id).getPaymentID();
     }
 
     // public void setItems (List<Long> newVar) throws MenuItemNotFoundException
@@ -187,6 +194,7 @@ public class OrderService {
     //  public double getOrderSubTotal ()
 
 
-
-
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
 }

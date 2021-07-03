@@ -5,137 +5,152 @@ import com.grubhub.lite.demo.exceptions.menuItems.MenuItemNotFoundException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.MenuItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class MenuItemService {
-    public MenuItem addMenuItem(MenuItem menuItem, Long id) throws MenuItemAlreadyExistsException {
-        if (RepositoryService.getMenuItemRepository().existsById(menuItem.getId())) {
+
+    @Autowired
+    private ApplicationContext context;
+
+    private final RepositoryService repositoryService = context.getBean(RepositoryService.class);
+
+    public MenuItem addMenuItem(MenuItem menuItem, Long parentRestaurantId) throws MenuItemAlreadyExistsException {
+        if (repositoryService.getMenuItemRepository().findAll().contains(menuItem)) {
             throw new MenuItemAlreadyExistsException(menuItem.getId());
         }
-        // add menu item to restaurant
-        // RepositoryService.setRestaurantRepository(RepositoryService.getMenuItemRepository().save(id));
-
+         //add menu item to restaurant
+         var parentRestaurant =  repositoryService.getRestaurantRepository().getById(parentRestaurantId);
+        parentRestaurant.getMenu().add(menuItem.getId());
+        repositoryService.getMenuItemRepository().save(menuItem);
+        return menuItem;
     }
 
     public MenuItem getMenuItemById(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setDescription (String newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setDescription(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setDescription(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public String getDescription(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getDescription();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getDescription();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setIngredients(List<String> newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setIngredients(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setIngredients(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public List<String> getIngredients(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getIngredients();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getIngredients();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setCalories (Integer newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setCalories(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setCalories(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public Integer getCalories (Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getCalories();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getCalories();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setIsInStock (Boolean newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setIsInStock(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setIsInStock(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public Boolean getIsInStock(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getIsInStock();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getIsInStock();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setPrice (Double newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setPrice(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setPrice(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public Double getPrice(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getPrice();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getPrice();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setDietaryRestrictions(List<Enums.DietaryRestrictions> newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setDietaryRestrictions(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setDietaryRestrictions(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public List<Enums.DietaryRestrictions> getDietaryRestrictions(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getDietaryRestrictions();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getDietaryRestrictions();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setCategory (String newVar, Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            RepositoryService.getMenuItemRepository().getById(id).setCategory(newVar);
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            repositoryService.getMenuItemRepository().getById(id).setCategory(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public String getCategory(Long id) throws MenuItemNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getCategory();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getCategory();
         }
         throw new MenuItemNotFoundException(id);
     }
 
     public void setRestaurantID(Long newVar, Long id) throws RestaurantNotFoundException {
-        if (RepositoryService.getRestaurantRepository().existsById(newVar)) {
-            RepositoryService.getMenuItemRepository().getById(id).setRestaurantID(newVar);
+        if (repositoryService.getRestaurantRepository().existsById(newVar)) {
+            repositoryService.getMenuItemRepository().getById(id).setRestaurantID(newVar);
         }
         throw new RestaurantNotFoundException(id);
     }
 
     public Long getRestaurantID(Long id) throws RestaurantNotFoundException {
-        if (RepositoryService.getMenuItemRepository().existsById(id)) {
-            return RepositoryService.getMenuItemRepository().getById(id).getRestaurantID();
+        if (repositoryService.getMenuItemRepository().existsById(id)) {
+            return repositoryService.getMenuItemRepository().getById(id).getRestaurantID();
         }
         throw new RestaurantNotFoundException(id);
     }
 
+    public void setContext(ApplicationContext context) {
+        this.context = context;
+    }
 }
