@@ -1,6 +1,9 @@
 package com.grubhub.lite.demo.controllers;
 
+import com.grubhub.lite.demo.exceptions.order.OrderNotFoundException;
+import com.grubhub.lite.demo.models.Driver;
 import com.grubhub.lite.demo.models.MenuItem;
+import com.grubhub.lite.demo.models.Payment;
 import com.grubhub.lite.demo.services.MenuItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/menuItems")
 public class MenuController {
     private MenuItemService menuItemService;
 
@@ -23,7 +27,7 @@ public class MenuController {
      * create a menu item
      */
     @CrossOrigin
-    @PostMapping("/menu")
+    @PostMapping("/menuItem")
     public void addAMenuItem(@RequestBody MenuItem menuItem, Long parentRestaurantID) {
         menuItemService.addMenuItem(menuItem,parentRestaurantID);
     }
@@ -34,19 +38,19 @@ public class MenuController {
      * Get a menu item by id
      */
     @CrossOrigin
-    @PutMapping("/menu/{id}")
+    @PutMapping(value = "/menuItem/{id}")
     public void updateAMenuItem( @PathVariable Long id, @RequestBody MenuItem menuDetails) {
         MenuItem updateMenuItem = menuItemService.getMenuItemById(id);
     }
-
 
     /**
      * perspective - admin
      * Get all menu items
      */
     @CrossOrigin
-    @GetMapping("/menu")
+    @GetMapping("/")
     public List<MenuItem> listAllMenuItems() {
-        return listAllMenuItems();
+        return menuItemService.getMenuItems();
     }
+
 }

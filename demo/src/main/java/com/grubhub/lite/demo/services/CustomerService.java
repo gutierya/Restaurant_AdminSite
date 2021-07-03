@@ -5,10 +5,7 @@ import com.grubhub.lite.demo.exceptions.customer.CustomerNotFoundException;
 import com.grubhub.lite.demo.exceptions.menuItems.MenuItemNotFoundException;
 import com.grubhub.lite.demo.exceptions.order.OrderNotFoundException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
-import com.grubhub.lite.demo.models.Customer;
-import com.grubhub.lite.demo.models.FoodOrder;
-import com.grubhub.lite.demo.models.MenuItem;
-import com.grubhub.lite.demo.models.Restaurant;
+import com.grubhub.lite.demo.models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,10 @@ public class CustomerService {
     CustomerService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
         log.info( this.getClass() + " Service: UP");
+    }
+
+    public List<Customer> getAllCustomers() {
+        return repositoryService.getCustomerRepository().findAll();
     }
 
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {

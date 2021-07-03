@@ -1,8 +1,5 @@
 package com.grubhub.lite.demo.models;
 
-import jdk.jfr.Enabled;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,21 +25,24 @@ public class MenuItem {
   private Boolean isInStock;
   private String imageUrl;
   private Double price;
-  @ElementCollection
-  private List<Enums.DietaryRestrictions> dietaryRestrictions;
+//  @ElementCollection
+//  private List<Enums.DietaryRestrictions> dietaryRestrictions;
+  private Enums.DietaryRestrictions dietaryRestrictions;
   private @Id
   @GeneratedValue
   Long id;
   private String category;
   private Long restaurantID;
+
+  MenuItem() { }
   
   //
   // Constructors
   //
-  public MenuItem () { };
+  public MenuItem(String burger, String cheesy_cheese_burger, List<String> ingredients, int calories, boolean isInStock, String imageUrl, double price, Enums.DietaryRestrictions glutenFree, String lunch, long restaurantID) { };
 
   public MenuItem(String itemName, String description, List<String> ingredients, Integer calories, Boolean isInStock,
-                  String imageUrl, Double price, List<Enums.DietaryRestrictions> dietaryRestrictions, String category,
+                  String imageUrl, Double price, Enums.DietaryRestrictions dietaryRestrictions, String category,
                   Long restaurantID) {
     this.itemName = itemName;
     this.description = description;
@@ -181,7 +181,7 @@ public class MenuItem {
    * Set the value of diataryRestrictions
    * @param newVar the new value of diataryRestrictions
    */
-  public void setDietaryRestrictions(List<Enums.DietaryRestrictions> newVar) {
+  public void setDietaryRestrictions(Enums.DietaryRestrictions newVar) {
     dietaryRestrictions = newVar;
   }
 
@@ -189,7 +189,7 @@ public class MenuItem {
    * Get the value of diataryRestrictions
    * @return the value of diataryRestrictions
    */
-  public List<Enums.DietaryRestrictions> getDietaryRestrictions() {
+  public Enums.DietaryRestrictions getDietaryRestrictions() {
     return dietaryRestrictions;
   }
 

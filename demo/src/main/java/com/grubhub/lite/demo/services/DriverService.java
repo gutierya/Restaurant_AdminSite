@@ -4,6 +4,7 @@ import com.grubhub.lite.demo.exceptions.customer.CustomerAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.driver.DriverNotFoundException;
 import com.grubhub.lite.demo.models.Driver;
 import com.grubhub.lite.demo.models.Enums;
+import com.grubhub.lite.demo.models.Restaurant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class DriverService {
@@ -24,8 +26,10 @@ public class DriverService {
     DriverService(RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
         log.info( this.getClass() + " Service: UP");
+    }
 
-
+    public List<Driver> getDrivers() {
+        return repositoryService.getDriverRepository().findAll();
     }
 
     public Driver addDriver(Driver driver) throws CustomerAlreadyExistsException {

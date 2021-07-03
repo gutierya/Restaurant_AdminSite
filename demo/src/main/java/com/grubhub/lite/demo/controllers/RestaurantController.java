@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/restaurants")
 public class RestaurantController {
 
-    private RestaurantService restaurantService; //
+    private RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {

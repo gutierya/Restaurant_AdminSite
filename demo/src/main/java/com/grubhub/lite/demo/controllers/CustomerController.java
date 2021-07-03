@@ -1,11 +1,15 @@
 package com.grubhub.lite.demo.controllers;
 
 import com.grubhub.lite.demo.models.Customer;
+import com.grubhub.lite.demo.models.Driver;
 import com.grubhub.lite.demo.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/customers")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -22,7 +26,7 @@ public class CustomerController {
      * create a user
      */
     @CrossOrigin
-    @PostMapping("/customer")
+    @PostMapping("/")
     public void addAUser(@RequestBody Customer customer) {
         customerService.addCustomer(customer);
     }
@@ -44,7 +48,7 @@ public class CustomerController {
      * Get one customer
      */
     @CrossOrigin
-    @RequestMapping(value = "/customer/{userID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byId/{userID}", method = RequestMethod.GET)
     public Customer listOneUser( @PathVariable Long userID){
         return this.customerService.getCustomerByid(userID);
     }
@@ -63,9 +67,10 @@ public class CustomerController {
      * perspective - admin
      * Get all customers
      */
-//    @CrossOrigin
-//    @GetMapping("/customers")
-//    public List<Customer> listAllUsers() {
-//        return customerService.getAllUsers();
-//    }
+    @CrossOrigin
+    @GetMapping("/")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
 }

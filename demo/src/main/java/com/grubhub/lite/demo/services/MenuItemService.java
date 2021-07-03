@@ -3,6 +3,7 @@ package com.grubhub.lite.demo.services;
 import com.grubhub.lite.demo.exceptions.menuItems.MenuItemAlreadyExistsException;
 import com.grubhub.lite.demo.exceptions.menuItems.MenuItemNotFoundException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
+import com.grubhub.lite.demo.models.Driver;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.MenuItem;
 import org.slf4j.Logger;
@@ -26,6 +27,10 @@ public class MenuItemService {
         this.repositoryService = repositoryService;
         log.info( this.getClass() + " Service: UP");
 
+    }
+
+    public List<MenuItem> getMenuItems() {
+        return repositoryService.getMenuItemRepository().findAll();
     }
 
     public MenuItem addMenuItem(MenuItem menuItem, Long parentRestaurantId) throws MenuItemAlreadyExistsException {
@@ -116,14 +121,14 @@ public class MenuItemService {
         throw new MenuItemNotFoundException(id);
     }
 
-    public void setDietaryRestrictions(List<Enums.DietaryRestrictions> newVar, Long id) throws MenuItemNotFoundException {
+    public void setDietaryRestrictions(Enums.DietaryRestrictions newVar, Long id) throws MenuItemNotFoundException {
         if (repositoryService.getMenuItemRepository().existsById(id)) {
             repositoryService.getMenuItemRepository().getById(id).setDietaryRestrictions(newVar);
         }
         throw new MenuItemNotFoundException(id);
     }
 
-    public List<Enums.DietaryRestrictions> getDietaryRestrictions(Long id) throws MenuItemNotFoundException {
+    public Enums.DietaryRestrictions getDietaryRestrictions(Long id) throws MenuItemNotFoundException {
         if (repositoryService.getMenuItemRepository().existsById(id)) {
             return repositoryService.getMenuItemRepository().getById(id).getDietaryRestrictions();
         }

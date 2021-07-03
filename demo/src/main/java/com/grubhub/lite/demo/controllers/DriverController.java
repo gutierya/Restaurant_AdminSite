@@ -1,11 +1,15 @@
 package com.grubhub.lite.demo.controllers;
 
 import com.grubhub.lite.demo.models.Driver;
+import com.grubhub.lite.demo.models.Restaurant;
 import com.grubhub.lite.demo.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/drivers")
 public class DriverController {
 
     private DriverService driverService;
@@ -22,31 +26,31 @@ public class DriverController {
      * create a driver
      */
     @CrossOrigin
-    @PostMapping("/driver")
+    @PostMapping(value = "/createDriver")
     public void addADriver(@RequestBody Driver driver) {
         driverService.addDriver(driver);
     }
 
 
     /**
-     * perspective - driver interacting with client
-     * update a driver
-     */
-//    @CrossOrigin
-//    @PutMapping("/driver/{id}")
-//    public void updateADriver( @PathVariable Long id, @RequestBody Driver driverDetails) {
-//        Driver myDriver = new Driver();
-//        Driver updateDriver = driverService.updateUser(id, myDriver);
-//    }
-
-    /**
      * perspective - admin
      * Get one driver
      */
     @CrossOrigin
-    @RequestMapping(value = "/driver/{id}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/byId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/byId/{id}")
     public Driver listAllDrivers(@PathVariable Long id){
         return this.driverService.getDriverByid(id);
+    }
+
+    /**
+     * perspective - admin
+     * Get all drivers
+     */
+    @CrossOrigin
+    @GetMapping(value= "/")
+    public List<Driver> listAllDrivers() {
+        return driverService.getDrivers();
     }
 
     /**
@@ -60,12 +64,14 @@ public class DriverController {
 //    }
 
     /**
-     * perspective - admin
-     * Get all drivers
+     * perspective - driver interacting with client
+     * update a driver
      */
 //    @CrossOrigin
-//    @GetMapping("/drivers")
-//    public List<Driver> listAllDrivers() {
-//        return driverService.getAllUsers();
+//    @PutMapping("/driver/{id}")
+//    public void updateADriver( @PathVariable Long id, @RequestBody Driver driverDetails) {
+//        Driver myDriver = new Driver();
+//        Driver updateDriver = driverService.updateUser(id, myDriver);
 //    }
+
 }
