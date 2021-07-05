@@ -27,6 +27,7 @@ public class PaymentController {
      * @return All payments in DB
      */
     @GetMapping("/")
+    @CrossOrigin
     public List<Payment> getAllPayments() {
         return paymentService.getAllPayments();
     }
@@ -37,6 +38,8 @@ public class PaymentController {
          * Get payment by paymentID - in payment class
          */
         @GetMapping(value = "/byID/{paymentID}")
+        @CrossOrigin
+
         public Payment getPaymentByID(@PathVariable Long paymentID) throws OrderNotFoundException {
             return this.paymentService.getPaymentById(paymentID);
         }
@@ -46,6 +49,8 @@ public class PaymentController {
          * get payment by type
          */
         @GetMapping(value = "/byType/{paymentType}")
+        @CrossOrigin
+
         public List<Payment> getPaymentType(@PathVariable Enums.PaymentType paymentType ){
             return this.paymentService.getPaymentType(paymentType);
         }
@@ -54,6 +59,8 @@ public class PaymentController {
          * get payment status
          */
         @GetMapping(value = "/byStatus/{paymentStatus}")
+        @CrossOrigin
+
         public List<Payment> getPaymentByStatus(@PathVariable Enums.PaymentStatus paymentStatus) throws OrderNotFoundException {
             return this.paymentService.getPaymentStatus(paymentStatus);
         }

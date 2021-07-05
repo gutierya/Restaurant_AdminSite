@@ -29,6 +29,7 @@ public class RestaurantController {
      * Get all restaurants
      */
     @GetMapping(value = "/")
+    @CrossOrigin
     public List<Restaurant> getAllRestaurant() {
         return restaurantService.getRestaurants();
     }
@@ -38,6 +39,7 @@ public class RestaurantController {
      * @return
      */
     @GetMapping(value = "/open")
+    @CrossOrigin
     public List<Restaurant> getRestaurantIfOpen() {
         return restaurantService.getByIsOpen();
     }
@@ -48,6 +50,7 @@ public class RestaurantController {
 //    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
     @GetMapping("/cuisine/{cuisine}")
+    @CrossOrigin
     public List<Restaurant> getRestaurantByCuisine(@PathVariable Enums.Cuisine cuisine) {
         return this.restaurantService.getByType(cuisine);
     }
@@ -58,6 +61,7 @@ public class RestaurantController {
 //    @RequestMapping(value = "/restaurant", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseBody
     @GetMapping("/valueProp/{valueProp}")
+    @CrossOrigin
     public List<Restaurant> getRestaurantByValueProp(@PathVariable Enums.ValueProp valueProp) {
         return this.restaurantService.getByValueProposition(valueProp);
     }
@@ -66,6 +70,7 @@ public class RestaurantController {
      * get restaurants by rating
      */
     @GetMapping(value = "/rating/{rating}")
+    @CrossOrigin
     public List<Restaurant> getRestaurantByRating(@PathVariable Short rating) {
         return this.restaurantService.getRating(rating);
     }
@@ -76,6 +81,7 @@ public class RestaurantController {
      * get restaurant - by restaurant id
      */
     @GetMapping(value = "/byID/{id}")
+    @CrossOrigin
     public Restaurant getRestaurantByID(@PathVariable Long id) {
         return restaurantService.getRestaurantByid(id);
     }
@@ -86,21 +92,25 @@ public class RestaurantController {
      */
     @RequestMapping(value = "/{restaurantID}/items", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
+    @CrossOrigin
     public Boolean getAllItems(@PathVariable Long restaurantID) {
         return this.restaurantService.getOffersTakeout(restaurantID);
     }
 
     @GetMapping("/byDietaryRestrictions")
+    @CrossOrigin
     public List<Restaurant> getByDietaryRestrictions(@RequestBody List<Enums.DietaryRestrictions> restrictions) {
         return restaurantService.getByRestrictions(restrictions);
     }
 
     @GetMapping("/{id}/menu")
+    @CrossOrigin
     public List<MenuItem> getRestaurantMenu(@PathVariable Long id) {
         return restaurantService.getRestaurantMenu(id);
     }
 
     @PostMapping("/{id}/menu")
+    @CrossOrigin
     public MenuItem addMenuItem(@PathVariable Long id, @RequestBody MenuItem newItem) {
         return restaurantService.addItemToRestaurantMenu(id, newItem);
     }

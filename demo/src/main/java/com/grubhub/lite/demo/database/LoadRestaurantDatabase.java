@@ -24,22 +24,29 @@ public class LoadRestaurantDatabase {
 
     @Bean
     CommandLineRunner initRestaurantDB(RestaurantRepository repository) {
-        menu.add(1L);
-        menu.add(2L);
-        menu.add(3L);
-        menu.add(4L);
-        menu.add(5L);
-        menu.add(6L);
-        menu.add(7L);
+        menu.add(12L);
+        menu.add(22L);
+        menu.add(31L);
+        menu.add(14L);
+        menu.add(15L);
+        menu.add(16L);
+        menu.add(17L);
         return args -> {
 
             //American restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
             log.info("Preloading + " + repository.save(new Restaurant("American Restaurant", (short) 5, "101 testing st", true,
                     new Date(2022,Calendar.DECEMBER,5), new Date(2023, Calendar.DECEMBER,5), Enums.Cuisine.American,
-                    20.0, Enums.ValueProp.HighEnd, new ArrayList<Long>(), restrictions1,
+                    20.0, Enums.ValueProp.HighEnd, menu, restrictions1,
                     true, new ArrayList<String>())));
             restrictions1.clear();
+            menu.add(13L);
+            menu.add(21L);
+            menu.add(30L);
+            menu.add(13L);
+            menu.add(14L);
+            menu.add(15L);
+            menu.add(18L);
 
             //Chinese restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
@@ -49,6 +56,13 @@ public class LoadRestaurantDatabase {
                     true, new ArrayList<String>())));
             restrictions1.clear();
 
+            menu.add(16L);
+            menu.add(26L);
+            menu.add(35L);
+            menu.add(19L);
+            menu.add(15L);
+            menu.add(23L);
+            menu.add(19L);
             //Japanese restaurant
             restrictions1.add(Enums.DietaryRestrictions.Vegetarian);
             log.info("Preloading + " + repository.save(new Restaurant("Japanese Restaurant ", (short) 2, "103 testing st", false,
@@ -57,6 +71,13 @@ public class LoadRestaurantDatabase {
                     false, new ArrayList<String>())));
             restrictions1.clear();
 
+            menu.add(19L);
+            menu.add(24L);
+            menu.add(32L);
+            menu.add(18L);
+            menu.add(25L);
+            menu.add(27L);
+            menu.add(29L);
             //Korean restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
             log.info("Preloading + " + repository.save(new Restaurant("Korean Restaurant ", (short) 2, "104 testing st", true,
@@ -65,6 +86,13 @@ public class LoadRestaurantDatabase {
                     false, new ArrayList<String>())));
             restrictions1.clear();
 
+            menu.add(16L);
+            menu.add(26L);
+            menu.add(35L);
+            menu.add(19L);
+            menu.add(15L);
+            menu.add(23L);
+            menu.add(19L);
             //Latin restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
             log.info("Preloading + " + repository.save(new Restaurant("Latin Restaurant ", (short) 2, "105 testing st", false,
@@ -73,6 +101,13 @@ public class LoadRestaurantDatabase {
                     true, new ArrayList<String>())));
             restrictions1.clear();
 
+            menu.add(17L);
+            menu.add(25L);
+            menu.add(31L);
+            menu.add(33L);
+            menu.add(36L);
+            menu.add(39L);
+            menu.add(23L);
             //Hispanic restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
             log.info("Preloading + " + repository.save(new Restaurant("Hispanic Restaurant ", (short) 2, "106 testing st", true,
@@ -80,6 +115,13 @@ public class LoadRestaurantDatabase {
                     50.0, Enums.ValueProp.HighEnd, menu, restrictions1,
                     false, new ArrayList<String>())));
             restrictions1.add(Enums.DietaryRestrictions.NA);
+            menu.add(13L);
+            menu.add(14L);
+            menu.add(15L);
+            menu.add(16L);
+            menu.add(17L);
+            menu.add(18L);
+            menu.add(19L);
 
             //Fast food restaurant
             restrictions1.add(Enums.DietaryRestrictions.NA);
