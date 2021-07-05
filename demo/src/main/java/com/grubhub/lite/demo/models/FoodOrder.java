@@ -21,7 +21,7 @@ public class FoodOrder {
   private Date expectedCompletion;
   private Long sourceRestaurantID;
   @ElementCollection
-  private List<Long> items;
+  private List<String> items;
   private Enums.OrderStatus status;
   private Long deliveryDriverID;
   private Long destUserID;
@@ -37,7 +37,7 @@ public class FoodOrder {
   //
   public FoodOrder() { };
 
-  public FoodOrder(Date createdTime, Date expectedCompletion, Long sourceRestaurantID, List<Long> items,
+  public FoodOrder(Date createdTime, Date expectedCompletion, Long sourceRestaurantID, List<String> items,
                    Enums.OrderStatus status, Long deliveryDriverID, Long destUserID, Double orderTotal, Double tax,
                    Double orderSubTotal, Long customerID, Double tipAmount, Long paymentID) {
     this.createdTime = createdTime;
@@ -133,7 +133,7 @@ public class FoodOrder {
    * Set the value of items
    * @param newVar the new value of items
    */
-  public void setItems (List<Long> newVar) {
+  public void setItems (List<String> newVar) {
     items = newVar;
   }
 
@@ -141,7 +141,7 @@ public class FoodOrder {
    * Get the value of items
    * @return the value of items
    */
-  public List<Long> getItems () {
+  public List<String> getItems () {
     return items;
   }
 
