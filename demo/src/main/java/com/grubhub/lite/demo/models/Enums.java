@@ -13,7 +13,7 @@ public interface Enums {
     }
 
     public enum DietaryRestrictions {
-        DairyFree, GlutenFree, Vegan, Vegetarian
+        DairyFree, GlutenFree, Vegan, Vegetarian, NA
     }
 
     public enum VehicleType {
