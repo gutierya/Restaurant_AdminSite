@@ -2,6 +2,7 @@ package com.grubhub.lite.demo.models;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.*;
 
 
@@ -9,6 +10,7 @@ import java.util.*;
  * Class Customer
  */
 @Entity
+@Table
 public class Customer extends User {
 
   //

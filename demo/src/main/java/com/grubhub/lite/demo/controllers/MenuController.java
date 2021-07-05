@@ -39,8 +39,8 @@ public class MenuController {
      */
     @CrossOrigin
     @PutMapping(value = "/menuItem/{id}")
-    public void updateAMenuItem( @PathVariable Long id, @RequestBody MenuItem menuDetails) {
-        MenuItem updateMenuItem = menuItemService.getMenuItemById(id);
+    public MenuItem updateAMenuItem( @PathVariable Long id, @RequestBody MenuItem menuDetails) {
+        return menuItemService.updateMenuItem(id, menuDetails);
     }
 
     /**

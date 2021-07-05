@@ -1,9 +1,6 @@
 package com.grubhub.lite.demo.models;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +8,7 @@ import java.util.Objects;
  * Class MenuItem
  */
 @Entity
+@Table
 public class MenuItem {
 
   //
@@ -34,13 +32,11 @@ public class MenuItem {
   private String category;
   private Long restaurantID;
 
-  MenuItem() { }
+  public MenuItem() { }
   
   //
   // Constructors
   //
-  public MenuItem(String burger, String cheesy_cheese_burger, List<String> ingredients, int calories, boolean isInStock, String imageUrl, double price, Enums.DietaryRestrictions glutenFree, String lunch, long restaurantID) { };
-
   public MenuItem(String itemName, String description, List<String> ingredients, Integer calories, Boolean isInStock,
                   String imageUrl, Double price, Enums.DietaryRestrictions dietaryRestrictions, String category,
                   Long restaurantID) {

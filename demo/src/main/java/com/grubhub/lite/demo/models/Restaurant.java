@@ -1,9 +1,6 @@
 package com.grubhub.lite.demo.models;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.*;
 
 
@@ -11,6 +8,7 @@ import java.util.*;
  * Class Restaurant
  */
 @Entity
+@Table
 public class Restaurant {
 
   //

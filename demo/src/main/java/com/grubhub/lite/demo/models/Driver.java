@@ -3,6 +3,7 @@ package com.grubhub.lite.demo.models;
 import jdk.jfr.Enabled;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ import java.util.Objects;
  * Class Driver
  */
 @Entity
+@Table
 public class Driver extends User {
 
   //

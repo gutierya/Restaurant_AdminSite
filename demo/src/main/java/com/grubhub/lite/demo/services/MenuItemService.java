@@ -166,4 +166,15 @@ public class MenuItemService {
     public void setContext(ApplicationContext context) {
         this.context = context;
     }
+
+    public MenuItem updateMenuItem(Long id, MenuItem menuDetails) {
+        if(repositoryService.getMenuItemRepository().existsById(id)) {
+            MenuItem current = repositoryService.getMenuItemRepository().findById(id).orElseThrow(()-> new MenuItemNotFoundException(id));
+            menuDetails.setId(current.getId());
+            menuDetails.setRestaurantID(current.getRestaurantID());
+            repositoryService.getMenuItemRepository().save(menuDetails);
+            return menuDetails;
+        }
+        throw new RestaurantNotFoundException(id);
+    }
 }

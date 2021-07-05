@@ -9,6 +9,7 @@ import java.util.Objects;
  * Class Order
  */
 @Entity
+@Table
 public class FoodOrder {
 
   //

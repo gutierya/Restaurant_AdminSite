@@ -1,6 +1,7 @@
 package com.grubhub.lite.demo.controllers;
 
 import com.grubhub.lite.demo.models.Enums;
+import com.grubhub.lite.demo.models.MenuItem;
 import com.grubhub.lite.demo.models.Restaurant;
 import com.grubhub.lite.demo.services.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +93,15 @@ public class RestaurantController {
     @GetMapping("/byDietaryRestrictions")
     public List<Restaurant> getByDietaryRestrictions(@RequestBody List<Enums.DietaryRestrictions> restrictions) {
         return restaurantService.getByRestrictions(restrictions);
+    }
+
+    @GetMapping("/{id}/menu")
+    public List<MenuItem> getRestaurantMenu(@PathVariable Long id) {
+        return restaurantService.getRestaurantMenu(id);
+    }
+
+    @PostMapping("/{id}/menu")
+    public MenuItem addMenuItem(@PathVariable Long id, @RequestBody MenuItem newItem) {
+        return restaurantService.addItemToRestaurantMenu(id, newItem);
     }
 }

@@ -3,6 +3,7 @@ package com.grubhub.lite.demo.services;
 import com.grubhub.lite.demo.exceptions.GlobalException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
+import com.grubhub.lite.demo.models.MenuItem;
 import com.grubhub.lite.demo.models.Restaurant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -245,5 +246,32 @@ public class RestaurantService {
         }
         throw new GlobalException("Empty Restaurant DB");
 
+    }
+
+    public List<MenuItem> getRestaurantMenu(Long restaurantID) {
+        if(repositoryService.getRestaurantRepository().existsById(restaurantID)) {
+            List<Long> menuItemIDs = repositoryService.getRestaurantRepository().findById(restaurantID).orElseThrow(
+                    () -> new RestaurantNotFoundException(restaurantID)).getMenu();
+            List<MenuItem> menuItems = new ArrayList<>();
+            for(MenuItem item : repositoryService.getMenuItemRepository().findAll()) {
+                if(menuItemIDs.contains(item.getId())) {
+                    menuItems.add(item);
+                }
+            }
+            return menuItems;
+        } else throw new RestaurantNotFoundException(restaurantID);
+    }
+
+    public MenuItem addItemToRestaurantMenu(Long restaurantID, MenuItem newItem) {
+        if (repositoryService.getRestaurantRepository().existsById(restaurantID)) {
+            MenuItem savedItem = repositoryService.getMenuItemRepository().save(newItem);
+            Restaurant parentRestaurant = repositoryService.getRestaurantRepository().findById(restaurantID).orElseThrow(
+                    () -> new RestaurantNotFoundException(restaurantID));
+            parentRestaurant.getMenu().add(savedItem.getId());
+            repositoryService.getRestaurantRepository().save(parentRestaurant);
+            return savedItem;
+        } else {
+            throw new RestaurantNotFoundException(restaurantID);
+        }
     }
 }

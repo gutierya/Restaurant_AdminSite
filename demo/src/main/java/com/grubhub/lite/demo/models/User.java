@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.*;
 
 
@@ -12,6 +13,8 @@ import java.util.*;
  * Class User
  */
 @Entity
+@Table
+
 public class User {
 
   //

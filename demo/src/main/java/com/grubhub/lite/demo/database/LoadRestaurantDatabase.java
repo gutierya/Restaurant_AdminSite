@@ -19,10 +19,14 @@ public class LoadRestaurantDatabase {
     private static final Logger log = LoggerFactory.getLogger(LoadDriverDatabase.class);
 
     private ArrayList<Enums.DietaryRestrictions> restrictions1 = new ArrayList<>();
+    private ArrayList<Long> menu = new ArrayList<>();
+
 
     @Bean
     CommandLineRunner initRestaurantDB(RestaurantRepository repository) {
         restrictions1.add(Enums.DietaryRestrictions.DairyFree);
+        menu.add(6L);
+        menu.add(5L);
         return args -> {
             log.info("Preloading + " + repository.save(new Restaurant("Test", (short) 5, "0000 testing st", true,
                     new Date(2022,Calendar.DECEMBER,5), new Date(2023, Calendar.DECEMBER,5), Enums.Cuisine.American,
@@ -32,7 +36,7 @@ public class LoadRestaurantDatabase {
             restrictions1.add(Enums.DietaryRestrictions.GlutenFree);
             log.info("Preloading + " + repository.save(new Restaurant("Test 2 ", (short) 2, "0000 testing st", false,
                     new Date(2022,Calendar.DECEMBER,5), new Date(2023, Calendar.DECEMBER,5), Enums.Cuisine.Chinese,
-                    20.0, Enums.ValueProp.Cheap, new ArrayList<Long>(), restrictions1,
+                    20.0, Enums.ValueProp.Cheap, menu, restrictions1,
                     false, new ArrayList<String>())));
         };
     }
