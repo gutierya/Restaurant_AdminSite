@@ -47,7 +47,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<img src="Login.gif" width=500><br>
+<img src="Login.gif" width=500>
+<img src="RestaurantsAndOrders.gif" width=500>
+<br>
 
 
 
