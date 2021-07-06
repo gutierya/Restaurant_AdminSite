@@ -84,6 +84,9 @@ public class CustomerService {
         throw new CustomerNotFoundException(id);
     }
 
+    public void deleteById(Long id) {
+        repositoryService.getCustomerRepository().deleteById(id);
+    }
 }
 
 

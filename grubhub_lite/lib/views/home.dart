@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grubhub_lite/views/customers.dart';
+import 'package:grubhub_lite/views/drivers.dart';
+import 'package:grubhub_lite/views/orders.dart';
 import 'package:grubhub_lite/views/payments.dart';
 import 'package:grubhub_lite/views/restaurants.dart';
 
@@ -52,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Orders"),
                       ],
                     ),
-                    onPressed: () {/*TODO: Implement this */}),
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Orders()))),
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
@@ -83,7 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Customers"),
                       ],
                     ),
-                    onPressed: () {/*TODO: Implement this */}),
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Customers()))),
                 ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
@@ -98,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text("Drivers"),
                       ],
                     ),
-                    onPressed: () {/*TODO: Implement this */}),
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Drivers()))),
               ]),
         ));
   }

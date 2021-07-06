@@ -93,4 +93,8 @@ public class DriverService {
     public void setContext(ApplicationContext context) {
         this.context = context;
     }
+
+    public void delete(Long driverID) {
+        repositoryService.getDriverRepository().deleteById(driverID);
+    }
 }

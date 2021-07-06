@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:grubhub_lite/components/addRestaurantDialog.dart';
-import 'package:grubhub_lite/components/restaurantTile.dart';
-import 'package:grubhub_lite/models/restaurant.dart';
+import 'package:grubhub_lite/components/orderTile.dart';
+import 'package:grubhub_lite/models/order.dart';
 
-class RestaurantList extends StatelessWidget {
-  final List<Restaurant> restaurants;
+class OrderList extends StatelessWidget {
+  final List<Order> orders;
   final tileOnTap;
 
-  RestaurantList({required this.restaurants, this.tileOnTap});
+  OrderList({required this.orders, required this.tileOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +14,7 @@ class RestaurantList extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Restaurans Nearby",
-            style: TextStyle(fontSize: 24, color: Colors.amber[900])),
+        Text("Orders", style: TextStyle(fontSize: 24, color: Colors.blue[900])),
         SizedBox(
           height: 10,
         ),
@@ -27,7 +25,7 @@ class RestaurantList extends StatelessWidget {
                 color: Colors.green,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(Icons.add), Text("Restaurant")],
+                  children: [Icon(Icons.add), Text("Order")],
                 ),
                 onPressed: () {}),
             SizedBox(
@@ -37,7 +35,7 @@ class RestaurantList extends StatelessWidget {
                 color: Colors.red,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(Icons.remove), Text("Restaurant")],
+                  children: [Icon(Icons.remove), Text("Order")],
                 ),
                 onPressed: () {}),
           ],
@@ -52,11 +50,9 @@ class RestaurantList extends StatelessWidget {
                 border: Border.all(color: Colors.grey[700]!)),
             padding: const EdgeInsets.all(10),
             child: ListView.builder(
-                itemCount: restaurants.length,
-                itemBuilder: (_, index) => RestaurantTile(
-                    restaurant: restaurants[index],
-                    index: index,
-                    onTap: tileOnTap))),
+                itemCount: orders.length,
+                itemBuilder: (_, index) => OrderTile(
+                    order: orders[index], index: index, onTap: tileOnTap))),
       ],
     );
   }

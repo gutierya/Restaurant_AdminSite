@@ -25,7 +25,7 @@ class MenuItemTile extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 5,
+              width: 10,
             ),
             Flexible(
               child: Container(
@@ -33,6 +33,7 @@ class MenuItemTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 20),
                     Text(
                       '${item.itemName}',
                       overflow: TextOverflow.ellipsis,
@@ -57,6 +58,7 @@ class MenuItemTile extends StatelessWidget {
                     ),
                     Text('Price : \$ ${item.price}',
                         overflow: TextOverflow.ellipsis),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),

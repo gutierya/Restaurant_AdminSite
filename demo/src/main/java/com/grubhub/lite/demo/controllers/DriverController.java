@@ -26,9 +26,15 @@ public class DriverController {
      * create a driver
      */
     @CrossOrigin
-    @PostMapping(value = "/createDriver")
+    @PostMapping(value = "/")
     public void addADriver(@RequestBody Driver driver) {
         driverService.addDriver(driver);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/{driverId}")
+    public void deleteDriver(@PathVariable Long driverId) {
+        driverService.delete(driverId);
     }
 
 

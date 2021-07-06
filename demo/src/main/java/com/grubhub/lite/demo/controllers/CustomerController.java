@@ -57,11 +57,12 @@ public class CustomerController {
      * perspective - admin
      * delete one customer
      */
-//    @CrossOrigin
-//    @DeleteMapping(value = "/customer/{id}" )
-//    public void deleteAUser(@PathVariable Long userID) {
-//        customerService.deleteById(userID);
-//    }
+    @DeleteMapping(value = "/{id}" )
+    @CrossOrigin
+    public void deleteAUser(@PathVariable Long id) {
+        System.out.println("Deleting " + id);
+        customerService.deleteById(id);
+    }
 
     /**
      * perspective - admin

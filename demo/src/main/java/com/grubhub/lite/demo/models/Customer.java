@@ -16,7 +16,7 @@ public class Customer extends User {
   //
   // Fields
   //
-
+  private String name;
   private String address;
 
   @ElementCollection
@@ -31,13 +31,16 @@ public class Customer extends User {
   //
   public Customer () { };
 
-  public Customer(String uniqueIdentifier, String address, List<Long> orderHistory, List<Long> favoriteRestaurants, List<Long> favoriteItems) {
+  public Customer(String uniqueIdentifier, String address, List<Long> orderHistory, List<Long> favoriteRestaurants, List<Long> favoriteItems, String name) {
     super(uniqueIdentifier);
     this.address = address;
     this.orderHistory = orderHistory;
     this.favoriteRestaurants = favoriteRestaurants;
     this.favoriteItems = favoriteItems;
+    this.name = name;
   }
+
+
 
   //
   // Methods
@@ -47,6 +50,15 @@ public class Customer extends User {
   //
   // Accessor methods
   //
+
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 
   /**
    * Set the value of address
@@ -144,6 +156,7 @@ public class Customer extends User {
   @Override
   public String toString() {
     return "Customer{" +
+            "user=" + super.toString() +
             "address='" + address + '\'' +
             ", orderHistory=" + orderHistory +
             ", favoriteRestaurants=" + favoriteRestaurants +

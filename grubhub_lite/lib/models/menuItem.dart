@@ -36,7 +36,7 @@ class MenuItem {
       'isInStock': isInStock,
       'imageUrl': imageUrl,
       'price': price,
-      'dietaryRestrictions': dietaryRestrictions,
+      'dietaryRestrictions': toString(dietaryRestrictions),
       'category': category,
       'restaurantID': restaurantID
     };

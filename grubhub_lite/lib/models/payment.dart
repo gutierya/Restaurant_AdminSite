@@ -7,13 +7,10 @@ class Payment {
   PaymentStatus paymentStatus;
 
   Payment(
-      {required this.id,
-      required this.paymentType,
-      required this.paymentStatus});
+      {this.id = 0, required this.paymentType, required this.paymentStatus});
 
   Map<String, dynamic> toJson() {
     return {
-      'paymentID': id,
       'paymentType': EnumToString.convertToString(paymentType),
       'paymentStatus': EnumToString.convertToString(paymentStatus)
     };

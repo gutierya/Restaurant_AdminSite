@@ -23,10 +23,12 @@ class PaymentTile extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return ListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       leading: leadingIcon(),
       title: Text('Payment ID: ${payment.id}'),
       subtitle: Text('${toString(payment.paymentType)}'),
       trailing: Text('${toString(payment.paymentStatus)}'),
+      onTap: () {},
     );
   }
 }

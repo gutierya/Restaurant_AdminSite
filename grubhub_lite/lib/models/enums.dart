@@ -8,7 +8,7 @@ enum OrderStatus {
   Received,
   PaymentReceived,
   Cooking,
-  AwaitingPickup,
+  AwaitingPickUp,
   InTransit,
   Delivered,
   Cancelled

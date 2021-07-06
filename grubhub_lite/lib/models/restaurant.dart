@@ -41,11 +41,11 @@ class Restaurant {
       'isOpen': isOpen,
       'timeOpen': timeOpen,
       'timeClose': timeClose,
-      'type': type,
+      'type': toString(type),
       'averageWaitTime': averageWaitTime,
-      'valueProposition': valueProposition,
+      'valueProposition': toString(valueProposition),
       'menu': menu,
-      'dietaryRestrictions': dietaryRestrictions,
+      'dietaryRestrictions': toString(dietaryRestrictions),
       'offersTakeOut': offersTakeOut,
       'categories': categories
     };

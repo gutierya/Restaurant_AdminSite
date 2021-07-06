@@ -40,6 +40,7 @@ public class LoadRestaurantDatabase {
                     20.0, Enums.ValueProp.HighEnd, menu, restrictions1,
                     true, new ArrayList<String>())));
             restrictions1.clear();
+            menu.clear();
             menu.add(13L);
             menu.add(21L);
             menu.add(30L);
@@ -55,6 +56,7 @@ public class LoadRestaurantDatabase {
                     10.0, Enums.ValueProp.Expensive, menu, restrictions1,
                     true, new ArrayList<String>())));
             restrictions1.clear();
+            menu.clear();
 
             menu.add(16L);
             menu.add(26L);
@@ -70,6 +72,7 @@ public class LoadRestaurantDatabase {
                     15.0, Enums.ValueProp.Expensive, menu, restrictions1,
                     false, new ArrayList<String>())));
             restrictions1.clear();
+            menu.clear();
 
             menu.add(19L);
             menu.add(24L);
@@ -85,6 +88,7 @@ public class LoadRestaurantDatabase {
                     35.0, Enums.ValueProp.Cheap, menu, restrictions1,
                     false, new ArrayList<String>())));
             restrictions1.clear();
+            menu.clear();
 
             menu.add(16L);
             menu.add(26L);
@@ -100,6 +104,7 @@ public class LoadRestaurantDatabase {
                     40.0, Enums.ValueProp.Cheap, menu, restrictions1,
                     true, new ArrayList<String>())));
             restrictions1.clear();
+            menu.clear();
 
             menu.add(17L);
             menu.add(25L);
@@ -115,6 +120,9 @@ public class LoadRestaurantDatabase {
                     50.0, Enums.ValueProp.HighEnd, menu, restrictions1,
                     false, new ArrayList<String>())));
             restrictions1.add(Enums.DietaryRestrictions.NA);
+            restrictions1.clear();
+            menu.clear();
+
             menu.add(13L);
             menu.add(14L);
             menu.add(15L);

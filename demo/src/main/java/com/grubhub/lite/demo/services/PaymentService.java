@@ -93,4 +93,12 @@ public class PaymentService {
     public List<Payment> getAllPayments() {
         return repositoryService.getPaymentRepository().findAll();
     }
+
+    public void addPayment(Payment payment) {
+        repositoryService.getPaymentRepository().save(payment);
+    }
+
+    public void deletePayment(Long id) {
+        repositoryService.getPaymentRepository().deleteById(id);
+    }
 }

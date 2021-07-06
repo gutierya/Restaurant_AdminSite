@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grubhub_lite/components/paymentTile.dart';
+import 'package:grubhub_lite/dialogs/addPaymentDialog.dart';
+import 'package:grubhub_lite/dialogs/removePaymentDialog.dart';
 import 'package:grubhub_lite/models/payment.dart';
 
 class PaymentList extends StatelessWidget {
@@ -28,7 +30,9 @@ class PaymentList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [Icon(Icons.add), Text("Payment")],
                 ),
-                onPressed: () => {}),
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => AddPaymentDialog())),
             SizedBox(
               width: 50,
             ),
@@ -38,7 +42,11 @@ class PaymentList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [Icon(Icons.remove), Text("Payment")],
                 ),
-                onPressed: () {}),
+                onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => RemovePaymentDialog(
+                          payments: payments,
+                        ))),
           ],
         ),
         SizedBox(

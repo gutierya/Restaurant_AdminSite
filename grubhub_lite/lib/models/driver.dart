@@ -5,35 +5,32 @@ import 'User.dart';
 class Driver extends User {
   int rating;
   VehicleType vehicleType;
-  DateTime estimatedArrivalTime;
+  String estimatedArrivalTime;
 
   Driver(
-      {required String uuid, required int id, required this.rating,
-        required this.vehicleType,
-        required this.estimatedArrivalTime
-      }) : super(uuid: uuid, id: id);
-
-  int get driverRating  => rating;
-  VehicleType get vehicle => vehicleType;
-  DateTime get arrivalTime => estimatedArrivalTime;
+      {required String uuid,
+      required int id,
+      required this.rating,
+      required this.vehicleType,
+      required this.estimatedArrivalTime})
+      : super(uuid: uuid, id: id);
 
   Map<String, dynamic> toJson() {
     return {
-      'uuid': super.uuid,
-      'id': super.id,
-      'rating' : rating,
-      'vehicleType': vehicleType,
+      'uniqueIdentifier': super.uuid,
+      'userID': super.id,
+      'rating': rating,
+      'vehicle': toString(vehicleType),
       'estimatedArrivalTime': estimatedArrivalTime
     };
   }
-}
 
-Driver fromJson(Map<String, dynamic> json) {
-  return Driver(
-    uuid: json['uuid'],
-    id: json['id'],
-    rating: json['rating'],
-    vehicleType: json['vehicleType'],
-    estimatedArrivalTime: json['estimatedArrivalTime']
-  );
+  factory Driver.fromJson(Map<String, dynamic> json) {
+    return Driver(
+        uuid: json['uniqueIdentifier'],
+        id: json['userID'],
+        rating: json['rating'],
+        vehicleType: enumFromString(VehicleType.values, json['vehicle']),
+        estimatedArrivalTime: json['estimatedArrivalTime']);
+  }
 }

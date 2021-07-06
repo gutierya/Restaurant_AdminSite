@@ -8,11 +8,14 @@ import com.grubhub.lite.demo.exceptions.order.OrderUnableToCancelException;
 import com.grubhub.lite.demo.exceptions.restaurant.RestaurantNotFoundException;
 import com.grubhub.lite.demo.models.Enums;
 import com.grubhub.lite.demo.models.FoodOrder;
+import com.grubhub.lite.demo.models.MenuItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -216,5 +219,20 @@ public class OrderService {
 
     public List<FoodOrder> getAllOrders() {
         return repositoryService.getOrderRepository().findAll();
+    }
+
+    public List<MenuItem> getOrderItems(Long orderId) throws OrderNotFoundException {
+        if(repositoryService.getOrderRepository().existsById(orderId)) {
+            List<Long> itemIds = repositoryService.getOrderRepository().findById(orderId).orElseThrow(() -> new OrderNotFoundException(orderId)).getItems();
+            List<MenuItem> menuItemsDB = repositoryService.getMenuItemRepository().findAll();
+            List<MenuItem> items = new ArrayList<>();
+            for(MenuItem item : menuItemsDB) {
+                if(itemIds.contains(item.getId())) {
+                    items.add(item);
+                }
+            }
+            return items;
+        } else
+            throw new OrderNotFoundException(orderId);
     }
 }

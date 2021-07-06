@@ -24,6 +24,7 @@ public class PaymentController {
 
     /**
      * Admin Functionality, get all payments.
+     *
      * @return All payments in DB
      */
     @GetMapping("/")
@@ -33,38 +34,48 @@ public class PaymentController {
     }
 
 
-        //Perspective - website admin/(restaurant)
-        /**
-         * Get payment by paymentID - in payment class
-         */
-        @GetMapping(value = "/byID/{paymentID}")
-        @CrossOrigin
+    //Perspective - website admin/(restaurant)
 
-        public Payment getPaymentByID(@PathVariable Long paymentID) throws OrderNotFoundException {
-            return this.paymentService.getPaymentById(paymentID);
-        }
-
-
-        /**
-         * get payment by type
-         */
-        @GetMapping(value = "/byType/{paymentType}")
-        @CrossOrigin
-
-        public List<Payment> getPaymentType(@PathVariable Enums.PaymentType paymentType ){
-            return this.paymentService.getPaymentType(paymentType);
-        }
-
-        /**
-         * get payment status
-         */
-        @GetMapping(value = "/byStatus/{paymentStatus}")
-        @CrossOrigin
-
-        public List<Payment> getPaymentByStatus(@PathVariable Enums.PaymentStatus paymentStatus) throws OrderNotFoundException {
-            return this.paymentService.getPaymentStatus(paymentStatus);
-        }
-
-
+    /**
+     * Get payment by paymentID - in payment class
+     */
+    @GetMapping(value = "/byID/{paymentID}")
+    @CrossOrigin
+    public Payment getPaymentByID(@PathVariable Long paymentID) throws OrderNotFoundException {
+        return this.paymentService.getPaymentById(paymentID);
     }
+
+
+    /**
+     * get payment by type
+     */
+    @GetMapping(value = "/byType/{paymentType}")
+    @CrossOrigin
+    public List<Payment> getPaymentType(@PathVariable Enums.PaymentType paymentType) {
+        return this.paymentService.getPaymentType(paymentType);
+    }
+
+    /**
+     * get payment status
+     */
+    @GetMapping(value = "/byStatus/{paymentStatus}")
+    @CrossOrigin
+    public List<Payment> getPaymentByStatus(@PathVariable Enums.PaymentStatus paymentStatus) throws OrderNotFoundException {
+        return this.paymentService.getPaymentStatus(paymentStatus);
+    }
+
+    @PostMapping("/")
+    @CrossOrigin
+    public void addPayment(@RequestBody Payment payment) {
+        this.paymentService.addPayment(payment);
+    }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin
+    public void deletePayment(@PathVariable Long id) {
+        this.paymentService.deletePayment(id);
+    }
+
+
+}
 

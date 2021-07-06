@@ -38,7 +38,7 @@ public class LoadCustomerDatabase {
         favItems.add(8L);
 
         return args -> {
-            log.info("Preloading " + repository.save(new Customer("1S", "123 main st", orderHistory, favRestaurants,favItems)));
+            log.info("Preloading " + repository.save(new Customer("1S", "123 main st", orderHistory, favRestaurants,favItems, "Vivian")));
             favRestaurants.clear();
             orderHistory.clear();
             favItems.clear();
@@ -52,7 +52,35 @@ public class LoadCustomerDatabase {
             favItems.add(13L);
             favItems.add(14L);
 
-            log.info("Preloading " + repository.save(new Customer("1T", "456 water st", orderHistory, favRestaurants,favItems)));
+            log.info("Preloading " + repository.save(new Customer("1T", "456 water st", orderHistory, favRestaurants,favItems, "Paul")));
+            favRestaurants.clear();
+            orderHistory.clear();
+            favItems.clear();
+
+            favRestaurants.add(9L);
+            favRestaurants.add(10L);
+
+            orderHistory.add(11L);
+            orderHistory.add(12L);
+
+            favItems.add(13L);
+            favItems.add(14L);
+
+            log.info("Preloading " + repository.save(new Customer("1T", "456 water st", orderHistory, favRestaurants,favItems, "Patrick")));
+            favRestaurants.clear();
+            orderHistory.clear();
+            favItems.clear();
+
+            favRestaurants.add(9L);
+            favRestaurants.add(10L);
+
+            orderHistory.add(11L);
+            orderHistory.add(12L);
+
+            favItems.add(13L);
+            favItems.add(14L);
+
+            log.info("Preloading " + repository.save(new Customer("1T", "456 water st", orderHistory, favRestaurants,favItems, "Juan")));
         };
     }
 }

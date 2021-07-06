@@ -14,8 +14,7 @@ class User {
     };
   }
 
-}
-
-User fromJson(Map<String, dynamic> json) {
-  return User(uuid: json['uuid'], id: json['id']);
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(uuid: json['uuid'], id: json['id']);
+  }
 }
