@@ -30,6 +30,8 @@ public class RestaurantService {
 
     }
 
+
+
     public Restaurant getRestaurantByid(Long id) throws RestaurantNotFoundException {
         if (repositoryService.getRestaurantRepository().existsById(id)) {
             return repositoryService.getRestaurantRepository().findById(id).orElseThrow(()-> new RestaurantNotFoundException(id));

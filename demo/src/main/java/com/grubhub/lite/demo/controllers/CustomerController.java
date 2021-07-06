@@ -19,7 +19,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    CustomerController() { }
+    public CustomerController() { }
 
     /**
      * perspective - user interacting with client
