@@ -47,10 +47,8 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+<img src="Login.gif" width=500><br>
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-* Login
-* 
 
 
 ### Built With
