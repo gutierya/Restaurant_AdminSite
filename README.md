@@ -47,9 +47,10 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-<img src="Login.gif" width=500>
-<img src="RestaurantsAndOrders.gif" width=500>
+<img src="Login.gif" width=425 height=425><img src="RestaurantsAndOrders.gif" width=425 height=425>
+<img src="Customer.gif" width=425  height=425><img src="Payment.gif" width=425  height=425>
 <br>
+add/remove functions are not available in restaurant and order screens
 
 
 
@@ -57,9 +58,6 @@
 
 * [Java]()
 * [Dart]()
-* []()
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
