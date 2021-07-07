@@ -6,6 +6,7 @@ class Driver extends User {
   int rating;
   VehicleType vehicleType;
   String estimatedArrivalTime;
+  static final String driverPrefix = 'drivers/';
 
   Driver(
       {required String uuid,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grubhub_lite/backend/database.dart';
-import 'package:grubhub_lite/components/menuList.dart';
-import 'package:grubhub_lite/components/restaurantList.dart';
+import 'package:grubhub_lite/components/customList.dart';
+import 'package:grubhub_lite/components/menuTile.dart';
+import 'package:grubhub_lite/components/removeDialog.dart';
+import 'package:grubhub_lite/components/restaurantTile.dart';
 import 'package:grubhub_lite/models/menuItem.dart';
 import 'package:grubhub_lite/models/restaurant.dart';
 
@@ -12,18 +14,41 @@ class RestaurantView extends StatefulWidget {
 class _RestaurantViewState extends State<RestaurantView> {
   List<Restaurant> restaurants = [];
   List<MenuItem> selectedRestaurantMenuItems = [];
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
   _RestaurantViewState() {
-    getRestaurants().then((result) => setState(() => {restaurants = result}));
+    loadRestaurants();
+  }
+
+  void loadRestaurants() {
+    get<Restaurant>(endPoint: Restaurant.restaurantPrefix)
+        .then((restaurants) => setState(() {
+              this.restaurants = restaurants;
+            }));
   }
 
   void tilePressed(int index) async {
-    getMenuItems(restaurantId: restaurants[index].id)
+    get<MenuItem>(
+            endPoint:
+                Restaurant.restaurantPrefix + '${restaurants[index].id}/menu')
         .then((items) => setState(() {
               selectedRestaurantMenuItems = items;
               _selectedIndex = index;
             }));
+  }
+
+  Widget buildMenuItem(
+      {required dynamic parameter, dynamic index, dynamic onTap}) {
+    return new MenuItemTile(item: parameter);
+  }
+
+  Widget buildRestaurantTile(
+      {required dynamic parameter, dynamic index, dynamic onTap}) {
+    return RestaurantTile(
+      restaurant: parameter,
+      index: index,
+      onTap: onTap,
+    );
   }
 
   @override
@@ -42,9 +67,15 @@ class _RestaurantViewState extends State<RestaurantView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: RestaurantList(
-                      restaurants: restaurants,
-                      tileOnTap: tilePressed,
+                    child: CustomList<Restaurant>(
+                      items: this.restaurants,
+                      title: 'Restaurants',
+                      widgetForItems: buildRestaurantTile,
+                      onTap: (index) => tilePressed(index),
+                      removeElement: RemoveDialog(
+                        items: restaurants,
+                        action: (selected) => removeSelected(selected),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -52,10 +83,16 @@ class _RestaurantViewState extends State<RestaurantView> {
                   ),
                   if (this.selectedRestaurantMenuItems.length > 0)
                     Expanded(
-                      child: MenuList(
-                          restaurantID: restaurants[_selectedIndex].id,
-                          items: selectedRestaurantMenuItems),
-                    )
+                        child: CustomList<MenuItem>(
+                      items: selectedRestaurantMenuItems,
+                      title:
+                          'Menu For Restaurant ID: ${restaurants[_selectedIndex].id}',
+                      widgetForItems: buildMenuItem,
+                      removeElement: RemoveDialog<MenuItem>(
+                          items: selectedRestaurantMenuItems,
+                          action: (selected) => removeSelected(selected)),
+                      onTap: () => {},
+                    ))
                 ],
               ),
             ],

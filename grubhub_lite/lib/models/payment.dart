@@ -5,6 +5,7 @@ class Payment {
   final int id;
   final PaymentType paymentType;
   PaymentStatus paymentStatus;
+  static final String paymentsPrefix = 'payments/';
 
   Payment(
       {this.id = 0, required this.paymentType, required this.paymentStatus});

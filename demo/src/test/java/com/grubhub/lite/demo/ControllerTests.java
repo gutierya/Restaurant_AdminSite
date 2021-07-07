@@ -20,7 +20,7 @@ public class ControllerTests {
     @Test
     public void testGetCustomers() {
         //Arrange
-        final String baseUrl = "http://localhost:" + port + "/";
+        //final String baseUrl = "http://localhost:" + port + "/";
 
 
         //Act

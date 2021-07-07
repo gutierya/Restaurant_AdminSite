@@ -6,6 +6,7 @@ class Customer extends User {
   final List<dynamic> favoriteItems;
   final String address;
   final String name;
+  static final String customerPrefix = 'customers/';
 
   Customer(
       {required String uuid,
@@ -17,6 +18,7 @@ class Customer extends User {
       required this.name})
       : super(uuid: uuid, id: id);
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'uniqueIdentifier': super.uuid,
@@ -28,10 +30,6 @@ class Customer extends User {
       'userID': 0
     };
   }
-
-  List<int> get previousOrders => orderHistory as List<int>;
-  List<int> get likedRestaurants => favoriteRestaurants as List<int>;
-  List<int> get likedItems => favoriteItems as List<int>;
 
   factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(

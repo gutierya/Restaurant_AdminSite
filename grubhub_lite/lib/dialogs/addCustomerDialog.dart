@@ -23,7 +23,8 @@ class _AddCustomerState extends State<AddCustomerDialog> {
         favoriteRestaurants: favoriteRestaurants,
         orderHistory: orderHistory,
         id: 0);
-    addCustomer(customer: customer);
+    //addCustomer(customer: customer);
+    add<Customer>(endPoint: Customer.customerPrefix, object: customer);
     Navigator.of(context).pop();
   }
 

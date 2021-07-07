@@ -14,6 +14,7 @@ class Order {
   final int customerID;
   final double tipAmount;
   final int paymentID;
+  static final String ordersPrefix = 'orders/';
 
   Order(
       {required this.id,

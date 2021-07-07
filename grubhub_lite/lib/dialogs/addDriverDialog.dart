@@ -20,7 +20,7 @@ class _AddDriverState extends State<AddDriverDialog> {
         vehicleType: vehicleType,
         estimatedArrivalTime: estimatedArrivalTime,
         id: 0);
-    addDriver(driver: driver);
+    add<Driver>(endPoint: Driver.driverPrefix, object: driver);
     Navigator.of(context).pop();
   }
 

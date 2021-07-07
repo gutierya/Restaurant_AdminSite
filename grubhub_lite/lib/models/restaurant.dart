@@ -15,6 +15,7 @@ class Restaurant {
   List<DietaryRestrictions> dietaryRestrictions;
   bool offersTakeOut;
   List<dynamic> categories;
+  static final String restaurantPrefix = 'restaurants/';
 
   Restaurant(
       {required this.id,
@@ -33,6 +34,10 @@ class Restaurant {
       this.categories = const []});
 
   Map<String, dynamic> toJson() {
+    List<String> restrictions = [];
+    for (DietaryRestrictions restriction in this.dietaryRestrictions) {
+      restrictions.add(toString(restriction));
+    }
     return {
       'id': id,
       'name': name,
@@ -45,7 +50,7 @@ class Restaurant {
       'averageWaitTime': averageWaitTime,
       'valueProposition': toString(valueProposition),
       'menu': menu,
-      'dietaryRestrictions': toString(dietaryRestrictions),
+      'dietaryRestrictions': restrictions.toString(),
       'offersTakeOut': offersTakeOut,
       'categories': categories
     };

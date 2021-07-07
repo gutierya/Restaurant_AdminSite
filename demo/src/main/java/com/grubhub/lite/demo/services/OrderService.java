@@ -235,4 +235,8 @@ public class OrderService {
         } else
             throw new OrderNotFoundException(orderId);
     }
+
+    public void deleteOrder(Long orderID) {
+        repositoryService.getOrderRepository().deleteById(orderID);
+    }
 }

@@ -50,26 +50,26 @@ public class LoadOrderDatabase {
                             2L, menu, Enums.OrderStatus.InTransit, 2L, 22L,
                             40D, 7D, 30D, 102L, 3D, 20L)));
             menu.clear();
-            menu.add(13L);
-            menu.add(21L);
-            menu.add(30L);
+            menu.add(12L);
+            menu.add(20L);
+            menu.add(29L);
+            menu.add(12L);
             menu.add(13L);
             menu.add(14L);
-            menu.add(15L);
-            menu.add(18L);
+            menu.add(17L);
 
             log.info("Preloading " + repository.save(
                     new FoodOrder(new Date(2021, 07, 22), new Date(2021, 07, 22),
                             2L, menu, Enums.OrderStatus.InTransit, 3L, 33L,
                             50D, 7D, 30D, 103L, 3D, 30L)));
             menu.clear();
-            menu.add(13L);
-            menu.add(21L);
-            menu.add(30L);
-            menu.add(13L);
+            menu.add(14L);
+            menu.add(22L);
+            menu.add(31L);
             menu.add(14L);
             menu.add(15L);
-            menu.add(18L);
+            menu.add(16L);
+            menu.add(19L);
 
 
             //Japanese - orders
@@ -78,37 +78,37 @@ public class LoadOrderDatabase {
                             3L, menu, Enums.OrderStatus.Delivered, 4L, 44L,
                             50D, 7D, 30D, 104L, 3D, 40L)));
             menu.clear();
-            menu.add(13L);
-            menu.add(21L);
-            menu.add(30L);
-            menu.add(13L);
-            menu.add(14L);
             menu.add(15L);
-            menu.add(18L);
+            menu.add(23L);
+            menu.add(32L);
+            menu.add(15L);
+            menu.add(16L);
+            menu.add(17L);
+            menu.add(19L);
             log.info("Preloading " + repository.save(
                     new FoodOrder(new Date(2021, 07, 23), new Date(2021, 07, 23),
                             3L, menu, Enums.OrderStatus.Delivered, 5L, 55L,
                             30D, 7D, 20D, 105L, 3D, 50L)));
             menu.clear();
-            menu.add(13L);
-            menu.add(21L);
-            menu.add(30L);
-            menu.add(13L);
-            menu.add(14L);
-            menu.add(15L);
+            menu.add(16L);
+            menu.add(24L);
+            menu.add(33L);
+            menu.add(16L);
+            menu.add(17L);
             menu.add(18L);
+            menu.add(21L);
             log.info("Preloading " + repository.save(
                     new FoodOrder(new Date(2021, 07, 23), new Date(2021, 07, 23),
                             4L, menu, Enums.OrderStatus.Delivered, 6L, 66L,
                             20D, 7D, 10D, 106L, 3D, 60L)));
             menu.clear();
-            menu.add(13L);
-            menu.add(21L);
-            menu.add(30L);
-            menu.add(13L);
-            menu.add(14L);
-            menu.add(15L);
+            menu.add(17L);
+            menu.add(25L);
+            menu.add(34L);
+            menu.add(17L);
             menu.add(18L);
+            menu.add(18L);
+            menu.add(22L);
             log.info("Preloading " + repository.save(
                     new FoodOrder(new Date(2021, 07, 23), new Date(2021, 07, 23),
                             4L, menu, Enums.OrderStatus.Delivered, 7L, 77L,

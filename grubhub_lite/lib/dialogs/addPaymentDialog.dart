@@ -14,7 +14,7 @@ class _AddPaymentDialogState extends State<AddPaymentDialog> {
   void createPayment() {
     final payment =
         new Payment(paymentType: _paymentType, paymentStatus: _paymentStatus);
-    addPayment(payment: payment);
+    add<Payment>(endPoint: Payment.paymentsPrefix, object: payment);
     Navigator.of(context).pop();
   }
 

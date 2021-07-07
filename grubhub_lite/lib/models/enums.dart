@@ -1,4 +1,6 @@
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum Cuisine { American, Chinese, Japanese, Korean, Latin, Hispanic, FastFood }
 enum ValueProp { Cheap, Medium, HighEnd, Expensive }
@@ -22,5 +24,18 @@ T enumFromString<T>(Iterable<T> values, String value) {
 }
 
 String toString<T>(T type) {
-  return EnumToString.convertToString(type);
+  return type.toString().split(".").last;
+}
+
+IconData getPaymentTypeIcon(PaymentType type) {
+  if (type == PaymentType.CreditCard)
+    return FontAwesomeIcons.creditCard;
+  else if (type == PaymentType.ApplePay) {
+    return FontAwesomeIcons.applePay;
+  } else if (type == PaymentType.GooglePay) {
+    return FontAwesomeIcons.googlePay;
+  } else if (type == PaymentType.PayPal) {
+    return FontAwesomeIcons.paypal;
+  } else
+    return FontAwesomeIcons.cashRegister;
 }

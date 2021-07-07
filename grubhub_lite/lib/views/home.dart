@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grubhub_lite/components/sectionButton.dart';
 import 'package:grubhub_lite/views/customers.dart';
 import 'package:grubhub_lite/views/drivers.dart';
 import 'package:grubhub_lite/views/orders.dart';
@@ -12,6 +14,49 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   ScaffoldState _scaffoldState = new ScaffoldState();
 
+  final List<String> buttonStrings = [
+    'Restaurants',
+    'Orders',
+    'Payments',
+    'Customers',
+    'Drivers',
+  ];
+  final List<Color> buttonColors = [
+    Colors.amber[900]!,
+    Colors.blue[900]!,
+    Colors.green[900]!,
+    Colors.purple[900]!,
+    Colors.cyan[900]!
+  ];
+
+  final List<IconData> buttonIcons = [
+    Icons.restaurant,
+    Icons.receipt,
+    FontAwesomeIcons.dollarSign,
+    FontAwesomeIcons.user,
+    FontAwesomeIcons.car,
+  ];
+  final List<dynamic> buttonActions = [
+    RestaurantView(),
+    Orders(),
+    Payments(),
+    Customers(),
+    Drivers()
+  ];
+
+  List<Widget> buildButtons() {
+    List<Widget> buttons = [];
+    for (int i = 0; i < this.buttonStrings.length; i++) {
+      buttons.add(HomeScreenButton(
+          text: buttonStrings[i],
+          iconData: buttonIcons[i],
+          color: buttonColors[i],
+          onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => buttonActions[i]))));
+    }
+    return buttons;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,89 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisSpacing: 20.0,
               crossAxisSpacing: 20.0,
               crossAxisCount: 5,
-              children: [
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.amber[900]!),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.restaurant),
-                        SizedBox(height: 5),
-                        Text("Restaurants"),
-                      ],
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => RestaurantView()))),
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue[900]!),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.receipt),
-                        SizedBox(height: 5),
-                        Text("Orders"),
-                      ],
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Orders()))),
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green[900]!),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.attach_money_outlined),
-                        SizedBox(height: 5),
-                        Text("Payments"),
-                      ],
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Payments()))),
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.purple[900]!),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.manage_accounts),
-                        SizedBox(height: 5),
-                        Text("Customers"),
-                      ],
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Customers()))),
-                ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.cyan[900]!),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.car_rental),
-                        SizedBox(height: 5),
-                        Text("Drivers"),
-                      ],
-                    ),
-                    onPressed: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Drivers()))),
-              ]),
+              children: buildButtons()),
         ));
   }
 }

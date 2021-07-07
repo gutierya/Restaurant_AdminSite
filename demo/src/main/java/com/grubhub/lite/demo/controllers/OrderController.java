@@ -105,5 +105,11 @@ public class OrderController {
         return orderService.getOrderItems(orderId);
     }
 
+    @DeleteMapping("/{id}")
+    @CrossOrigin
+    public void deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrder(id);
+    }
+
 
 }

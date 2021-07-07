@@ -13,6 +13,8 @@ class MenuItem {
   final String category;
   final int restaurantID;
 
+  static String menuItemPrefix = 'menuItems/';
+
   MenuItem({
     required this.id,
     required this.itemName,

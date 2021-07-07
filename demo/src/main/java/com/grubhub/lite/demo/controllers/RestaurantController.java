@@ -34,6 +34,12 @@ public class RestaurantController {
         return restaurantService.getRestaurants();
     }
 
+    @DeleteMapping("/{id}")
+    @CrossOrigin
+    public void deleteRestaurant(@PathVariable Long id) {
+        restaurantService.deleteRestaurant(id);
+    }
+
     /**
      * get restaurants if - open
      * @return

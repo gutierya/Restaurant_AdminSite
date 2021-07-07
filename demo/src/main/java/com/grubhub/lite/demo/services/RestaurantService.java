@@ -276,4 +276,8 @@ public class RestaurantService {
             throw new RestaurantNotFoundException(restaurantID);
         }
     }
+
+    public void deleteRestaurant(Long id) {
+        repositoryService.getRestaurantRepository().deleteById(id);
+    }
 }
